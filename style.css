@@ -8,7 +8,7 @@
 /* Estilo do corpo */
 body {
     font-family: 'Roboto', sans-serif;
-    background: url('img.jpg') no-repeat center center fixed; /* Se a imagem estiver na mesma pasta */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(0, 0, 0, 0.5)), url('img.jpg') no-repeat center center fixed; 
     background-size: cover; /* Garante que a imagem cubra todo o fundo */
     color: #343a40;
     line-height: 1.6;
@@ -19,9 +19,10 @@ body {
     max-width: 800px;
     margin: 40px auto;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.7); /* Fundo branco com opacidade */
+    background: rgba(255, 255, 255, 0.5); /* Fundo branco com opacidade */
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: none; /* Garante que não haja transição de cor */
 }
 
 /* Títulos */
@@ -29,23 +30,25 @@ h1, h2, h3 {
     margin-bottom: 15px;
     color: #007BFF;
     font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra sutil */
 }
 
 /* Estilo dos botões */
 button {
     background: #007BFF;
     color: #fff;
-    border: none;
+    border: 1px solid transparent; /* Borda transparente */
     padding: 12px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    transition: background 0.3s ease, transform 0.2s;
+    transition: none
 }
 
 button:hover {
     background: #0056b3;
     transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra ao passar o mouse */
 }
 
 /* Estilo dos formulários */
@@ -62,15 +65,16 @@ form {
 .form-control {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ced4da;
+    border: 1px solid #eee0e0;
     border-radius: 5px;
     margin-bottom: 15px;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transição para a borda */
 }
 
 .form-control:focus {
     border-color: #007BFF;
     outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra ao focar */
 }
 
 /* Estilo das mensagens e resultados */
@@ -114,9 +118,10 @@ th {
     color: white;
 }
 
-/* Adicionando um efeito ao hover da tabela */
+/* Efeito de hover na tabela */
 tr:hover {
     background-color: #f1f1f1;
+    transition: background-color 0.3s; /* Transição suave */
 }
 
 /* Links */
@@ -134,7 +139,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 textarea {
-    transition: box-shadow 0.3s;
+    transition: none; /* Remove a transição dos inputs */
 }
 
 input[type="text"]:focus,
