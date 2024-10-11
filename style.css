@@ -8,7 +8,8 @@
 /* Estilo do corpo */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #e9ecef;
+    background: url('D:\git\Tecnico\img.jpg') no-repeat center center fixed; /* Adicione o caminho correto */
+    background-size: cover; /* Garante que a imagem cubra todo o fundo */
     color: #343a40;
     line-height: 1.6;
 }
@@ -18,7 +19,7 @@ body {
     max-width: 800px;
     margin: 40px auto;
     padding: 20px;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.9); /* Fundo branco com opacidade */
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
