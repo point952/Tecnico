@@ -120,7 +120,7 @@ th {
 
 /* Efeito de hover na tabela */
 tr:hover {
-    background-color: #f1f1f1;
+    background-color: #b4b1b1;
     transition: background-color 0.3s; /* Transição suave */
 }
 
