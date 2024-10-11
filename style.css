@@ -8,7 +8,7 @@
 /* Estilo do corpo */
 body {
     font-family: 'Roboto', sans-serif;
-    background: url('D:\git\Tecnico\img.jpg') no-repeat center center fixed; /* Adicione o caminho correto */
+    background: url('img.jpg') no-repeat center center fixed; /* Se a imagem estiver na mesma pasta */
     background-size: cover; /* Garante que a imagem cubra todo o fundo */
     color: #343a40;
     line-height: 1.6;
