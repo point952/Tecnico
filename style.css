@@ -19,7 +19,7 @@ body {
     max-width: 800px;
     margin: 40px auto;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.85); /* Fundo branco com opacidade */
+    background: rgba(255, 255, 255, 0.75); /* Aumente a transparência diminuindo o valor */
     border-radius: 10px;
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2); /* Sombra mais intensa */
 }
