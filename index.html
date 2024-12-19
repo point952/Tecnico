@@ -86,6 +86,18 @@
                             <option value="PLUS BRIDGE">PLUS BRIDGE</option>
                         </select>
                     </div>
+
+                    <div class="mb-3">
+                        <label for="plano" class="form-label">PLANO:</label>
+                        <select class="form-select" id="plano" required onchange="toggleWifiSenhaFields()">
+                            <option value="">Selecione o plano</option>
+                            <option value="100 Mega">100 Mega</option>
+                            <option value="300 Mega">300 Mega</option>
+                            <option value="500 Mega">500 Mega</option>
+                            <option value="700 Mega">700 Mega</option>
+                        </select>
+                    </div>
+                    
                     <div class="mb-3">
                         <label for="tipoServico" class="form-label">TIPO DE SERVIÇO:</label>
                         <select class="form-select" id="tipoServico" required>
@@ -405,12 +417,15 @@
     
             function toggleWifiSenhaFields() {
                 const modeloSelect = document.getElementById('modelo');
+                const planoSelect = document.getElementById('plano');
                 const wifiField = document.getElementById('wifiField');
                 const senhaField = document.getElementById('senhaField');
                 const serialHelp = document.getElementById('serialHelp');
                 const wifiHelp = document.getElementById('wifiHelp');
                 const senhaHelp = document.getElementById('senhaHelp');
-    
+
+                const selectedplano = planoSelect.value;
+
                 const selectedModel = modeloSelect.value;
     
                 if (selectedModel === 'PLUS ROUTER' || selectedModel === 'PLUS BRIDGE') {
@@ -475,7 +490,7 @@
             }
     
             function gerarTabelaONU() {
-                const campos = ['cidade', 'modelo', 'tipoServico', 'servico', 'cliente', 'serial', 'sinalCaixa', 'sinalOnu', 'wifi', 'senha', 'coordenadas'];
+                const campos = ['servico', 'cidade', 'tipoServico', 'modelo', 'plano', 'cliente', 'serial', 'sinalCaixa', 'sinalOnu', 'wifi', 'senha', 'coordenadas'];
                 let tabelaFormatada = '';
                 campos.forEach(campo => {
                     const valor = document.getElementById(campo).value;
