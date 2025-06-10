@@ -1,151 +1,311 @@
-/* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* --- GERAL & TIPOGRAFIA --- */
+:root {
+    --primary-color: #4f46e5;
+    --secondary-color: #0891b2;
+    --dark-grey: #1f2937;
+    --light-grey: #f3f4f6;
+    --text-color: #374151;
+    --white: #ffffff;
+    --success: #16a34a;
+    --info: #0ea5e9;
+    --border-color: #e5e7eb;
 }
 
-/* Estilo do corpo */
+html {
+    /* Transição suave de cores ao mudar o tema */
+    transition: background-color 0.3s ease;
+}
+
 body {
-    font-family: 'Roboto', sans-serif;
-    background: url('img.jpg') no-repeat center center fixed; 
-    background-size: cover; /* Garante que a imagem cubra todo o fundo */
-    color: #343a40;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+    color: var(--text-color);
     line-height: 1.6;
 }
 
-/* Estilos para o contêiner principal */
-.container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.75); /* Aumente a transparência diminuindo o valor */
-    border-radius: 10px;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2); /* Sombra mais intensa */
+/* --- TELA PRINCIPAL --- */
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
 }
 
-/* Títulos */
-h1, h2, h3 {
-    margin-bottom: 15px;
-    color: #007BFF;
-    font-weight: 600; /* Um pouco mais ousado */
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+.main-logo {
+    width: 100px;
+    height: 100px;
+    opacity: 0.9;
 }
 
-/* Estilo dos botões */
-button {
-    background: #007BFF;
-    color: #fff;
-    border: none; /* Sem borda */
-    padding: 12px 20px;
-    border-radius: 5px;
+.main-title {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+}
+
+.main-subtitle {
+    color: var(--white);
+    opacity: 0.8;
+    font-size: 1.1rem;
+}
+
+.menu-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .menu-actions {
+        flex-direction: row;
+    }
+}
+
+/* --- BOTÕES CUSTOMIZADOS --- */
+.btn-primary-custom, .btn-secondary-custom, .btn-success-custom, .btn-light-custom, .btn-info-custom {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-weight: 600;
+    padding: 1rem 1.75rem;
+    border-radius: 50px;
+    border: none;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s ease, transform 0.2s, box-shadow 0.3s ease;
-    font-weight: 500; /* Um pouco mais ousado */
 }
 
-button:hover {
-    background: #0056b3;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Sombra ao passar o mouse */
+.btn-primary-custom {
+    background-color: var(--white);
+    color: var(--primary-color);
+}
+.btn-primary-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
-/* Estilo dos formulários */
-form {
-    margin-bottom: 20px;
+.btn-secondary-custom {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.btn-secondary-custom:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
 }
 
+/* --- MODAL (POP-UP) --- */
+.modal-content {
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    background-color: var(--white);
+    transition: background-color 0.3s ease;
+}
+
+.modal-header {
+    background-color: var(--light-grey);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.25rem 1.5rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.modal-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--dark-grey);
+    font-weight: 600;
+    font-size: 1.25rem;
+    transition: color 0.3s ease;
+}
+
+.modal-body {
+    padding: 1.5rem 2rem 2rem 2rem;
+}
+
+.modal-footer {
+    background-color: var(--light-grey);
+    border-top: 1px solid var(--border-color);
+    padding: 1rem 1.5rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* --- BOTÕES DENTRO DO MODAL --- */
+.btn-success-custom { background-color: var(--success); color: var(--white); }
+.btn-info-custom { background-color: var(--info); color: var(--white); padding: 0.5rem 1rem; border-radius: 8px; font-weight: 500; gap: 0.5rem; }
+.btn-light-custom { background-color: #e2e8f0; color: var(--dark-grey); box-shadow: none; font-weight: 500; }
+.btn-light-custom:hover { background-color: #cbd5e1; }
+
+
+/* --- FORMULÁRIOS --- */
 .form-label {
+    font-weight: 500;
+    color: #4a5568;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.form-control, .form-select {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    color: var(--text-color);
+}
+.form-control:focus, .form-select:focus {
+    background-color: var(--white);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+/* Estilos de validação do Bootstrap */
+.form-control.is-invalid, .form-select.is-invalid {
+    border-color: #dc3545;
+}
+.form-control.is-invalid:focus, .form-select.is-invalid:focus {
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+
+.input-group-text {
+    background-color: #e9ecef;
+    border: 1px solid #e2e8f0;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.helper-text {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #6c757d;
+    transition: color 0.3s ease;
 }
 
-.form-control {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    transition: border-color 0.3s, box-shadow 0.3s; /* Transição para a borda */
+.result-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dark-grey);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease, border-color 0.3s ease;
 }
 
-.form-control:focus {
-    border-color: #007BFF;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra ao focar */
+pre {
+    background-color: #f1f5f9;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e2e8f0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: monospace;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
-/* Estilo das mensagens e resultados */
-.result {
-    background-color: #e7f3fe;
-    border-left: 6px solid #2196F3;
-    padding: 15px;
-    margin-top: 20px;
-    border-radius: 5px;
+/* =============================================================================== */
+/* --- BOTÃO FLUTUANTE DE TEMA --- */
+/* =============================================================================== */
+.theme-toggle-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--white);
+    color: var(--primary-color);
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1056; /* Acima dos modais */
+    transition: all 0.3s ease;
+}
+.theme-toggle-btn:hover {
+    transform: scale(1.1);
 }
 
-/* Estilo para mensagens de erro */
-.error {
-    color: #dc3545;
-    margin-top: 10px;
+/* =============================================================================== */
+/* --- ESTILOS DO MODO NOTURNO (DARK THEME) --- */
+/* =============================================================================== */
+.dark-theme {
+    --dark-bg-1: #111827; /* Fundo principal */
+    --dark-bg-2: #1f2937; /* Fundo do modal */
+    --dark-bg-3: #374151; /* Cabeçalho/Rodapé do modal */
+    --dark-border: #4b5563;
+    --dark-text-primary: #f9fafb;
+    --dark-text-secondary: #d1d5db;
+
+    background: var(--dark-bg-1);
 }
 
-/* Estilo para esconder elementos */
-.hidden {
-    display: none;
+.dark-theme .modal-content {
+    background-color: var(--dark-bg-2);
 }
 
-/* Estilos de tabela */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+.dark-theme .modal-header, .dark-theme .modal-footer {
+    background-color: var(--dark-bg-3);
+    border-color: var(--dark-border);
 }
 
-table, th, td {
-    border: 1px solid #ddd;
+.dark-theme .modal-title {
+    color: var(--dark-text-primary);
 }
 
-th, td {
-    padding: 12px;
-    text-align: left;
+.dark-theme .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
 }
 
-th {
-    background-color: #007BFF;
-    color: white;
+.dark-theme .form-label {
+    color: var(--dark-text-secondary);
 }
 
-/* Efeito de hover na tabela */
-tr:hover {
-    background-color: #b4b1b1;
-    transition: background-color 0.3s; /* Transição suave */
+.dark-theme .form-control, .dark-theme .form-select {
+    background-color: var(--dark-bg-1);
+    border-color: var(--dark-border);
+    color: var(--dark-text-primary);
 }
 
-/* Links */
-a {
-    color: #007BFF;
-    text-decoration: none;
+.dark-theme .form-control:focus, .dark-theme .form-select:focus {
+    background-color: var(--dark-bg-2);
+    border-color: var(--primary-color);
 }
 
-a:hover {
-    text-decoration: underline;
-    color: #0056b3; /* Cor ao passar o mouse */
+.dark-theme .input-group-text {
+    background-color: var(--dark-bg-3);
+    border-color: var(--dark-border);
+    color: var(--dark-text-secondary);
 }
 
-/* Adicionando um pequeno efeito ao input */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-textarea {
-    transition: box-shadow 0.3s, border-color 0.3s; /* Transição suave */
+.dark-theme .helper-text {
+    color: #9ca3af;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-textarea:focus {
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+.dark-theme .result-title {
+    color: var(--dark-text-primary);
+    border-color: var(--primary-color);
+}
+
+.dark-theme pre {
+    background-color: var(--dark-bg-1);
+    border-color: var(--dark-border);
+    color: var(--dark-text-primary);
+}
+
+.dark-theme .btn-light-custom {
+    background-color: #4b5563;
+    color: var(--dark-text-primary);
+}
+.dark-theme .btn-light-custom:hover {
+    background-color: #6b7280;
 }
