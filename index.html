@@ -31,7 +31,7 @@
 
     <main class="main-container">
         <div class="text-center">
-            <img src="https://i.imgur.com/w2a6v5y.png" alt="Logo" class="main-logo mb-4">
+            <img src="coloridapoint.png" alt="Logo" class="main-logo mb-4">
             <h1 class="main-title">Sistema de Produção</h1>
             <p class="main-subtitle">Selecione uma opção para iniciar</p>
 
@@ -159,9 +159,14 @@
                     <div id="resultadoTabelaONU" class="mt-4" style="display: none;">
                         <h3 class="result-title">Tabela Gerada:</h3>
                         <pre id="tabelaTextoONU"></pre>
-                        <button type="button" class="btn btn-info-custom mt-2" onclick="copiarTabelaONU()">
-                            <span class="material-icons-outlined">content_copy</span>Copiar
-                        </button>
+                        <div class="action-buttons mt-2">
+                             <button type="button" class="btn btn-info-custom" onclick="copiarTabelaONU()">
+                                <span class="material-icons-outlined">content_copy</span>Copiar
+                            </button>
+                            <button type="button" class="btn btn-share-custom" onclick="shareTabelaONU()">
+                                <span class="material-icons-outlined">share</span>Compartilhar
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -214,9 +219,14 @@
                     <div id="resultadoTabelaCTO" class="mt-4" style="display: none;">
                         <h3 class="result-title">Tabela Gerada:</h3>
                         <pre id="tabelaTextoCTO"></pre>
-                        <button type="button" class="btn btn-info-custom mt-2" onclick="copiarTabelaCTO()">
-                             <span class="material-icons-outlined">content_copy</span>Copiar
-                        </button>
+                        <div class="action-buttons mt-2">
+                            <button type="button" class="btn btn-info-custom" onclick="copiarTabelaCTO()">
+                                 <span class="material-icons-outlined">content_copy</span>Copiar
+                            </button>
+                             <button type="button" class="btn btn-share-custom" onclick="shareTabelaCTO()">
+                                <span class="material-icons-outlined">share</span>Compartilhar
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -400,6 +410,20 @@
             });
         }
 
+        // --- NOVA FUNÇÃO DE COMPARTILHAR ---
+        function shareTabelaONU() {
+            const textToShare = document.getElementById('tabelaTextoONU').textContent;
+            if (navigator.share && textToShare) {
+                navigator.share({
+                    title: 'Relatório de Instalação',
+                    text: textToShare,
+                }).catch((error) => console.log('Erro ao compartilhar', error));
+            } else if (textToShare) {
+                // Fallback para navegadores que não suportam a API ou se não houver texto
+                alert('Seu navegador não suporta o compartilhamento direto. Use o botão "Copiar".');
+            }
+        }
+
         function limparCamposONU() {
             const form = document.getElementById('onuForm');
             form.reset();
@@ -451,6 +475,19 @@
             }, (err) => {
                 console.error('Erro ao copiar tabela: ', err);
             });
+        }
+
+        // --- NOVA FUNÇÃO DE COMPARTILHAR ---
+        function shareTabelaCTO() {
+            const textToShare = document.getElementById('tabelaTextoCTO').textContent;
+            if (navigator.share && textToShare) {
+                navigator.share({
+                    title: 'Relatório de Análise de CTO',
+                    text: textToShare,
+                }).catch((error) => console.log('Erro ao compartilhar', error));
+            } else if (textToShare) {
+                alert('Seu navegador não suporta o compartilhamento direto. Use o botão "Copiar".');
+            }
         }
 
         function limparCamposCTO() {
