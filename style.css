@@ -33,8 +33,9 @@ body {
 }
 
 .main-logo {
-    width: 251px;
-    height: 93px;
+    max-width: 251px;  /* Define a largura máxima que a logo pode ter */
+    width: 60%;       /* Em telas menores, ela ocupará 60% do espaço */
+    height: auto;     /* A altura se ajustará automaticamente para manter a proporção */
     opacity: 0.9;
 }
 
