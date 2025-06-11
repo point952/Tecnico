@@ -160,7 +160,7 @@
                         <h3 class="result-title">Tabela Gerada:</h3>
                         <pre id="tabelaTextoONU"></pre>
                         <div class="action-buttons mt-2">
-                             <button type="button" class="btn btn-info-custom" onclick="copiarTabelaONU()">
+                            <button type="button" class="btn btn-info-custom" onclick="copiarTabelaONU()">
                                 <span class="material-icons-outlined">content_copy</span>Copiar
                             </button>
                             <button type="button" class="btn btn-share-custom" onclick="shareTabelaONU()">
@@ -221,7 +221,7 @@
                         <pre id="tabelaTextoCTO"></pre>
                         <div class="action-buttons mt-2">
                             <button type="button" class="btn btn-info-custom" onclick="copiarTabelaCTO()">
-                                 <span class="material-icons-outlined">content_copy</span>Copiar
+                                <span class="material-icons-outlined">content_copy</span>Copiar
                             </button>
                              <button type="button" class="btn btn-share-custom" onclick="shareTabelaCTO()">
                                 <span class="material-icons-outlined">share</span>Compartilhar
@@ -409,18 +409,24 @@
                 console.error('Erro ao copiar tabela ONU: ', err);
             });
         }
-
-        // --- NOVA FUNÇÃO DE COMPARTILHAR ---
+        
+        // --- FUNÇÃO DE COMPARTILHAR ADICIONADA ---
         function shareTabelaONU() {
             const textToShare = document.getElementById('tabelaTextoONU').textContent;
-            if (navigator.share && textToShare) {
+            // Verifica se a "ponte" com o Android existe
+            if (window.Android && typeof window.Android.shareText === 'function') {
+                window.Android.shareText(textToShare);
+            } 
+            // Senão, tenta usar a API de compartilhamento do navegador
+            else if (navigator.share && textToShare) {
                 navigator.share({
                     title: 'Relatório de Instalação',
                     text: textToShare,
                 }).catch((error) => console.log('Erro ao compartilhar', error));
-            } else if (textToShare) {
-                // Fallback para navegadores que não suportam a API ou se não houver texto
-                alert('Seu navegador não suporta o compartilhamento direto. Use o botão "Copiar".');
+            } 
+            // Se nenhuma das opções funcionar, avisa o usuário
+            else if (textToShare) {
+                alert('Função de compartilhamento não suportada. Use o botão "Copiar".');
             }
         }
 
@@ -477,16 +483,18 @@
             });
         }
 
-        // --- NOVA FUNÇÃO DE COMPARTILHAR ---
+        // --- FUNÇÃO DE COMPARTILHAR ADICIONADA ---
         function shareTabelaCTO() {
             const textToShare = document.getElementById('tabelaTextoCTO').textContent;
-            if (navigator.share && textToShare) {
+            if (window.Android && typeof window.Android.shareText === 'function') {
+                window.Android.shareText(textToShare);
+            } else if (navigator.share && textToShare) {
                 navigator.share({
                     title: 'Relatório de Análise de CTO',
                     text: textToShare,
                 }).catch((error) => console.log('Erro ao compartilhar', error));
             } else if (textToShare) {
-                alert('Seu navegador não suporta o compartilhamento direto. Use o botão "Copiar".');
+                alert('Função de compartilhamento não suportada. Use o botão "Copiar".');
             }
         }
 
