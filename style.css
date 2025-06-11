@@ -8,11 +8,11 @@
     --white: #ffffff;
     --success: #16a34a;
     --info: #0ea5e9;
+    --share: #059669; /* Nova cor para o botão de compartilhar */
     --border-color: #e5e7eb;
 }
 
 html {
-    /* Transição suave de cores ao mudar o tema */
     transition: background-color 0.3s ease;
 }
 
@@ -33,8 +33,8 @@ body {
 }
 
 .main-logo {
-    width: 100px;
-    height: 100px;
+    width: 251px;
+    height: 93px;
     opacity: 0.9;
 }
 
@@ -64,7 +64,7 @@ body {
 }
 
 /* --- BOTÕES CUSTOMIZADOS --- */
-.btn-primary-custom, .btn-secondary-custom, .btn-success-custom, .btn-light-custom, .btn-info-custom {
+.btn-primary-custom, .btn-secondary-custom, .btn-success-custom, .btn-light-custom, .btn-info-custom, .btn-share-custom {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -136,8 +136,15 @@ body {
 }
 
 /* --- BOTÕES DENTRO DO MODAL --- */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
 .btn-success-custom { background-color: var(--success); color: var(--white); }
-.btn-info-custom { background-color: var(--info); color: var(--white); padding: 0.5rem 1rem; border-radius: 8px; font-weight: 500; gap: 0.5rem; }
+.btn-info-custom, .btn-share-custom { padding: 0.5rem 1rem; border-radius: 8px; font-weight: 500; gap: 0.5rem; }
+.btn-info-custom { background-color: var(--info); color: var(--white); }
+.btn-share-custom { background-color: var(--share); color: var(--white); } /* Estilo do novo botão */
 .btn-light-custom { background-color: #e2e8f0; color: var(--dark-grey); box-shadow: none; font-weight: 500; }
 .btn-light-custom:hover { background-color: #cbd5e1; }
 
@@ -163,7 +170,6 @@ body {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
-/* Estilos de validação do Bootstrap */
 .form-control.is-invalid, .form-select.is-invalid {
     border-color: #dc3545;
 }
@@ -228,7 +234,7 @@ pre {
     font-size: 24px;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 1056; /* Acima dos modais */
+    z-index: 1056; 
     transition: all 0.3s ease;
 }
 .theme-toggle-btn:hover {
@@ -239,9 +245,9 @@ pre {
 /* --- ESTILOS DO MODO NOTURNO (DARK THEME) --- */
 /* =============================================================================== */
 .dark-theme {
-    --dark-bg-1: #111827; /* Fundo principal */
-    --dark-bg-2: #1f2937; /* Fundo do modal */
-    --dark-bg-3: #374151; /* Cabeçalho/Rodapé do modal */
+    --dark-bg-1: #111827;
+    --dark-bg-2: #1f2937;
+    --dark-bg-3: #374151;
     --dark-border: #4b5563;
     --dark-text-primary: #f9fafb;
     --dark-text-secondary: #d1d5db;
