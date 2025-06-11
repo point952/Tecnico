@@ -160,7 +160,7 @@
                         <h3 class="result-title">Tabela Gerada:</h3>
                         <pre id="tabelaTextoONU"></pre>
                         <div class="action-buttons mt-2">
-                            <button type="button" class="btn btn-info-custom" onclick="copiarTabelaONU()">
+                             <button type="button" class="btn btn-info-custom" onclick="copiarTabelaONU()">
                                 <span class="material-icons-outlined">content_copy</span>Copiar
                             </button>
                             <button type="button" class="btn btn-share-custom" onclick="shareTabelaONU()">
@@ -221,7 +221,7 @@
                         <pre id="tabelaTextoCTO"></pre>
                         <div class="action-buttons mt-2">
                             <button type="button" class="btn btn-info-custom" onclick="copiarTabelaCTO()">
-                                <span class="material-icons-outlined">content_copy</span>Copiar
+                                 <span class="material-icons-outlined">content_copy</span>Copiar
                             </button>
                              <button type="button" class="btn btn-share-custom" onclick="shareTabelaCTO()">
                                 <span class="material-icons-outlined">share</span>Compartilhar
@@ -286,7 +286,6 @@
                 document.getElementById('senhaField').style.display = 'none';
             });
 
-            // --- Lógica do Tema Noturno ---
             const themeToggle = document.getElementById('theme-toggle');
             const themeIcon = document.getElementById('theme-icon');
             const currentTheme = localStorage.getItem('theme');
@@ -329,7 +328,13 @@
             const tipoServico = document.getElementById('tipoServico').value;
             const wifiField = document.getElementById('wifiField');
 
-            if ((tipoServico === 'Suporte' || tipoServico === 'Transferência' || tipoServico === 'Transferência+Upgrade') && wifiField.style.display !== 'none') {
+            // *** ALTERAÇÃO APLICADA AQUI ***
+            const shouldAsk = tipoServico === 'Suporte' || 
+                              tipoServico === 'Transferência' || 
+                              tipoServico === 'Transferência+Upgrade' || 
+                              tipoServico === 'Upgrade';
+
+            if (shouldAsk && wifiField.style.display !== 'none') {
                 confirmModal.show();
             }
         }
@@ -410,22 +415,16 @@
             });
         }
         
-        // --- FUNÇÃO DE COMPARTILHAR ADICIONADA ---
         function shareTabelaONU() {
             const textToShare = document.getElementById('tabelaTextoONU').textContent;
-            // Verifica se a "ponte" com o Android existe
             if (window.Android && typeof window.Android.shareText === 'function') {
                 window.Android.shareText(textToShare);
-            } 
-            // Senão, tenta usar a API de compartilhamento do navegador
-            else if (navigator.share && textToShare) {
+            } else if (navigator.share && textToShare) {
                 navigator.share({
                     title: 'Relatório de Instalação',
                     text: textToShare,
                 }).catch((error) => console.log('Erro ao compartilhar', error));
-            } 
-            // Se nenhuma das opções funcionar, avisa o usuário
-            else if (textToShare) {
+            } else if (textToShare) {
                 alert('Função de compartilhamento não suportada. Use o botão "Copiar".');
             }
         }
@@ -483,7 +482,6 @@
             });
         }
 
-        // --- FUNÇÃO DE COMPARTILHAR ADICIONADA ---
         function shareTabelaCTO() {
             const textToShare = document.getElementById('tabelaTextoCTO').textContent;
             if (window.Android && typeof window.Android.shareText === 'function') {
