@@ -8,8 +8,7 @@
     --white: #ffffff;
     --success: #16a34a;
     --info: #0ea5e9;
-    --share: #059669; 
-    --warning: #f59e0b; /* Cor para o novo alerta */
+    --share: #059669; /* Nova cor para o botão de compartilhar */
     --border-color: #e5e7eb;
 }
 
@@ -33,14 +32,11 @@ body {
     padding: 2rem;
 }
 
-.main-logo, .main-title, .main-subtitle {
-    opacity: 0;
-}
-
 .main-logo {
-    max-width: 251px;
-    width: 60%;
-    height: auto;
+    max-width: 251px;  /* Define a largura máxima que a logo pode ter */
+    width: 60%;       /* Em telas menores, ela ocupará 60% do espaço */
+    height: auto;     /* A altura se ajustará automaticamente para manter a proporção */
+    opacity: 0.9;
 }
 
 .main-title {
@@ -52,17 +48,14 @@ body {
 
 .main-subtitle {
     color: var(--white);
-    opacity: 0; 
+    opacity: 0.8;
+    font-size: 1.1rem;
 }
 
 .menu-actions {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-}
-
-.menu-actions .btn {
-    opacity: 0;
 }
 
 @media (min-width: 768px) {
@@ -72,7 +65,7 @@ body {
 }
 
 /* --- BOTÕES CUSTOMIZADOS --- */
-.btn-primary-custom, .btn-secondary-custom, .btn-success-custom, .btn-light-custom, .btn-info-custom, .btn-share-custom, .btn-warning-custom {
+.btn-primary-custom, .btn-secondary-custom, .btn-success-custom, .btn-light-custom, .btn-info-custom, .btn-share-custom {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -116,9 +109,6 @@ body {
 }
 
 .modal-header {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
     background-color: var(--light-grey);
     border-bottom: 1px solid var(--border-color);
     padding: 1.25rem 1.5rem;
@@ -146,41 +136,18 @@ body {
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.header-buttons {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.theme-toggle-header-btn {
-    background: none;
-    border: none;
-    color: #6b7280;
-    padding: 0.5rem;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-.theme-toggle-header-btn:hover {
-    background-color: rgba(0,0,0,0.05);
-}
-
 /* --- BOTÕES DENTRO DO MODAL --- */
 .action-buttons {
     display: flex;
     gap: 1rem;
-    flex-wrap: wrap; 
 }
 
 .btn-success-custom { background-color: var(--success); color: var(--white); }
 .btn-info-custom, .btn-share-custom { padding: 0.5rem 1rem; border-radius: 8px; font-weight: 500; gap: 0.5rem; }
 .btn-info-custom { background-color: var(--info); color: var(--white); }
-.btn-share-custom { background-color: var(--share); color: var(--white); } 
+.btn-share-custom { background-color: var(--share); color: var(--white); } /* Estilo do novo botão */
 .btn-light-custom { background-color: #e2e8f0; color: var(--dark-grey); box-shadow: none; font-weight: 500; }
 .btn-light-custom:hover { background-color: #cbd5e1; }
-.btn-warning-custom { background-color: var(--warning); color: #1f2937; padding: 0.6rem 1.5rem; border-radius: 8px; font-weight: 600;}
 
 
 /* --- FORMULÁRIOS --- */
@@ -202,7 +169,7 @@ body {
 .form-control:focus, .form-select:focus {
     background-color: var(--white);
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(18, 6, 238, 0.1);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
 .form-control.is-invalid, .form-select.is-invalid {
     border-color: #dc3545;
@@ -249,29 +216,31 @@ pre {
     transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
-/* --- ESTILOS DO NOVO MODAL DE ALERTA --- */
-.modal-header-alert {
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid #fde68a;
-    background-color: #fffbeb;
-}
-.modal-title-alert {
+/* =============================================================================== */
+/* --- BOTÃO FLUTUANTE DE TEMA --- */
+/* =============================================================================== */
+.theme-toggle-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--white);
+    color: var(--primary-color);
+    border: none;
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 0.75rem;
-    color: #b45309;
-    font-weight: 600;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1056; 
+    transition: all 0.3s ease;
 }
-.alert-icon {
-    color: var(--warning);
+.theme-toggle-btn:hover {
+    transform: scale(1.1);
 }
-.modal-footer-alert {
-    padding: 1rem 1.5rem;
-    background-color: var(--light-grey);
-    text-align: right;
-    border-top: 1px solid var(--border-color);
-}
-
 
 /* =============================================================================== */
 /* --- ESTILOS DO MODO NOTURNO (DARK THEME) --- */
@@ -300,19 +269,8 @@ pre {
     color: var(--dark-text-primary);
 }
 
-.dark-theme .modal-body {
-    color: var(--dark-text-secondary); /* Garante texto claro no corpo do modal */
-}
-
 .dark-theme .btn-close {
     filter: invert(1) grayscale(100%) brightness(200%);
-}
-
-.dark-theme .theme-toggle-header-btn {
-    color: var(--dark-text-secondary);
-}
-.dark-theme .theme-toggle-header-btn:hover {
-    background-color: rgba(255,255,255,0.1);
 }
 
 .dark-theme .form-label {
@@ -328,7 +286,6 @@ pre {
 .dark-theme .form-control:focus, .dark-theme .form-select:focus {
     background-color: var(--dark-bg-2);
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(18, 6, 238, 0.1);
 }
 
 .dark-theme .input-group-text {
@@ -352,44 +309,10 @@ pre {
     color: var(--dark-text-primary);
 }
 
-.dark-theme .modal-header-alert {
-    background-color: #573a0e;
-    border-color: #785521;
-}
-.dark-theme .modal-title-alert {
-    color: #fef08a; 
-}
-.dark-theme #alertModal .modal-body {
-    color: var(--dark-text-secondary);
-}
-.dark-theme .modal-footer-alert {
-    background-color: var(--dark-bg-3);
-    border-color: var(--dark-border);
-}
-.dark-theme .btn-warning-custom {
-    background-color: var(--warning);
-    color: var(--dark-grey);
-    font-weight: 700;
-}
-
 .dark-theme .btn-light-custom {
     background-color: #4b5563;
     color: var(--dark-text-primary);
 }
 .dark-theme .btn-light-custom:hover {
     background-color: #6b7280;
-}
-
-/* --- Correção de Contraste para o Modal de Confirmação no Modo Noturno --- */
-.dark-theme #modalConfirmWifiChange .modal-body {
-    color: var(--dark-text-secondary); /* Garante que o texto do parágrafo seja claro */
-}
-
-.dark-theme #modalConfirmWifiChange .btn-success-custom {
-    background-color: var(--primary-color);
-    color: var(--white);
-    border: 1px solid var(--primary-color);
-}
-.dark-theme #modalConfirmWifiChange .btn-success-custom:hover {
-    background-color: #6366f1; /* Um tom mais claro da cor primária no hover */
 }
