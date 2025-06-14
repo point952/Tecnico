@@ -91,7 +91,7 @@
                                 <option value="Instalação">Instalação</option>
                                 <option value="Upgrade">Upgrade</option>
                                 <option value="Transferência">Transferência</option>
-                                <option value="Transferência+Upgrade">Transferência+Upgrade</option>
+                                <option value="Transferência+Upgrade">Transferência + Troca de ONU</option>
                                 <option value="Suporte">Suporte</option>
                             </select>
                         </div>
@@ -149,7 +149,8 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" id="coordenadas" readonly>
                                 <button class="btn btn-outline-secondary" type="button" id="getLocation">
-                                    <span class="material-icons-outlined" style="font-size: 1.2rem; vertical-align: middle;">my_location</span>
+                                    <span class="spinner-border spinner-border-sm me-1" style="display: none;" role="status" aria-hidden="true"></span>
+                                    <span class="button-text"><span class="material-icons-outlined" style="font-size: 1.2rem; vertical-align: middle;">my_location</span></span>
                                 </button>
                             </div>
                         </div>
@@ -204,7 +205,8 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" id="ctoCoordenadas" readonly>
                                 <button class="btn btn-outline-secondary" type="button" id="getCTOLocation">
-                                    <span class="material-icons-outlined" style="font-size: 1.2rem; vertical-align: middle;">my_location</span>
+                                    <span class="spinner-border spinner-border-sm me-1" style="display: none;" role="status" aria-hidden="true"></span>
+                                    <span class="button-text"><span class="material-icons-outlined" style="font-size: 1.2rem; vertical-align: middle;">my_location</span></span>
                                 </button>
                             </div>
                         </div>
@@ -230,8 +232,7 @@
     <div class="modal fade" id="modalConfirmWifiChange" tabindex="-1" aria-labelledby="modalConfirmLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalConfirmLabel"><span class="material-icons-outlined">wifi_password</span> Alteração de Wi-Fi/Senha</h5>
+                <div class="modal-header"><h5 class="modal-title" id="modalConfirmLabel"><span class="material-icons-outlined">wifi_password</span> Alteração de Wi-Fi/Senha</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -249,15 +250,10 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header-alert">
-                    <h5 class="modal-title-alert" id="alertModalLabel">
-                        <span class="material-icons-outlined alert-icon">warning</span>
-                        Atenção
-                    </h5>
+                    <h5 class="modal-title-alert" id="alertModalLabel"><span class="material-icons-outlined alert-icon">warning</span> Atenção</h5>
                 </div>
                 <div class="modal-body" id="alertModalBody"></div>
-                <div class="modal-footer-alert">
-                    <button type="button" class="btn btn-warning-custom" data-bs-dismiss="modal">Entendi</button>
-                </div>
+                <div class="modal-footer-alert"><button type="button" class="btn btn-warning-custom" data-bs-dismiss="modal">Entendi</button></div>
             </div>
         </div>
     </div>
@@ -266,64 +262,55 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header-success">
-                    <h5 class="modal-title-success" id="successModalLabel">
-                        <span class="material-icons-outlined success-icon">check_circle</span>
-                        Sucesso
-                    </h5>
+                    <h5 class="modal-title-success" id="successModalLabel"><span class="material-icons-outlined success-icon">check_circle</span> Sucesso</h5>
                 </div>
                 <div class="modal-body" id="successModalBody"></div>
             </div>
         </div>
     </div>
 
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
     <script>
-        let confirmModal = null;
-        let alertModal = null;
-        let successModal = null;
+        let confirmModal, alertModal, successModal;
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Inicialização dos Modais do Bootstrap
             confirmModal = new bootstrap.Modal(document.getElementById('modalConfirmWifiChange'));
             alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
             successModal = new bootstrap.Modal(document.getElementById('successModal'));
 
+            // Preenche os campos de porta da CTO dinamicamente
             const servicosClienteDiv = document.getElementById('servicosCliente');
             for (let i = 1; i <= 16; i++) {
                 servicosClienteDiv.innerHTML += `<div class="mb-3" style="display: none;"><label for="servico${i}" class="form-label">Porta ${i}:</label><input type="text" class="form-control" id="servico${i}"></div>`;
             }
 
+            // Garante que a visibilidade dos campos de WiFi/Senha esteja correta ao carregar
             updateWifiFieldsVisibility();
 
+            // Adiciona eventos aos botões do modal de confirmação
             document.getElementById('btnSimAlterarWifi').addEventListener('click', () => {
                 document.getElementById('wifiField').style.display = 'block';
                 document.getElementById('senhaField').style.display = 'block';
             });
-
             document.getElementById('btnNaoAlterarWifi').addEventListener('click', () => {
                 document.getElementById('wifiField').style.display = 'none';
                 document.getElementById('senhaField').style.display = 'none';
             });
 
+            // Lógica do Tema Noturno
             const themeToggleButtons = document.querySelectorAll('.theme-toggle-header-btn');
             const currentTheme = localStorage.getItem('theme');
             const isDark = currentTheme === 'dark';
             themeToggleButtons.forEach(btn => {
                 btn.querySelector('.material-icons-outlined').textContent = isDark ? 'light_mode' : 'dark_mode';
             });
-
             themeToggleButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    anime({
-                        targets: btn.querySelector('.material-icons-outlined'),
-                        rotate: '1turn',
-                        duration: 500,
-                        easing: 'easeInOutSine'
-                    });
+                    anime({ targets: btn.querySelector('.material-icons-outlined'), rotate: '1turn', duration: 500, easing: 'easeInOutSine' });
                     document.documentElement.classList.toggle('dark-theme');
-                    let newTheme = 'light';
-                    let newIcon = 'dark_mode';
+                    let newTheme = 'light', newIcon = 'dark_mode';
                     if (document.documentElement.classList.contains('dark-theme')) {
                         newTheme = 'dark';
                         newIcon = 'light_mode';
@@ -333,35 +320,16 @@
                 });
             });
 
-            const mainTimeline = anime.timeline({
-                easing: 'easeOutExpo',
-                duration: 1000
-            });
-            mainTimeline.add({
-                targets: '.main-logo',
-                opacity: [0, 1],
-                scale: [0.8, 1]
-            }).add({
-                targets: '.main-title',
-                opacity: [0, 1],
-                translateY: [-20, 0]
-            }, '-=800').add({
-                targets: '.main-subtitle',
-                opacity: [0, 1],
-                translateY: [-20, 0]
-            }, '-=700').add({
-                targets: '.menu-actions .btn',
-                opacity: [0, 1],
-                translateY: [-20, 0],
-                delay: anime.stagger(150)
-            }, '-=600');
-
-            document.getElementById('getLocation').addEventListener('click', function() {
-                getLocation('coordenadas');
-            });
-            document.getElementById('getCTOLocation').addEventListener('click', function() {
-                getCTOLocation();
-            });
+            // Animações de Entrada com Anime.js
+            const mainTimeline = anime.timeline({ easing: 'easeOutExpo', duration: 1000 });
+            mainTimeline.add({ targets: '.main-logo', opacity: [0, 1], scale: [0.8, 1] })
+                      .add({ targets: '.main-title', opacity: [0, 1], translateY: [-20, 0] }, '-=800')
+                      .add({ targets: '.main-subtitle', opacity: [0, 1], translateY: [-20, 0] }, '-=700')
+                      .add({ targets: '.menu-actions .btn', opacity: [0, 1], translateY: [-20, 0], delay: anime.stagger(150) }, '-=600');
+            
+            // Listeners para os botões de geolocalização
+            document.getElementById('getLocation').addEventListener('click', function() { getLocation('coordenadas', this); });
+            document.getElementById('getCTOLocation').addEventListener('click', function() { getCTOLocation(this); });
         });
 
         function showAlert(message) {
@@ -377,58 +345,69 @@
             }, 2000);
         }
 
-        function handleLocationError(error) {
-            let errorMessage = "Não foi possível obter a localização. ";
-            switch (error.code) {
-                case error.PERMISSION_DENIED:
-                    errorMessage += "Você negou a permissão de localização. Verifique os ajustes do seu navegador e do celular.";
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    errorMessage += "As informações de localização não estão disponíveis no momento.";
-                    break;
-                case error.TIMEOUT:
-                    errorMessage += "A requisição demorou demais para responder.";
-                    break;
-                default:
-                    errorMessage += "Ocorreu um erro desconhecido.";
-                    break;
-            }
-            showAlert(errorMessage);
+        function toggleButtonLoading(button, isLoading) {
+            if (!button) return;
+            const spinner = button.querySelector('.spinner-border');
+            const text = button.querySelector('.button-text');
+            button.disabled = isLoading;
+            if (spinner) spinner.style.display = isLoading ? 'inline-block' : 'none';
+            if (text) text.style.display = isLoading ? 'none' : 'inline-block';
         }
 
-        function getLocation(elementId) {
+        function handleLocationError(error, button) {
+            let msg = "Não foi possível obter a localização. ";
+            switch (error.code) {
+                case error.PERMISSION_DENIED: msg += "Você negou a permissão de localização."; break;
+                case error.POSITION_UNAVAILABLE: msg += "Informações de localização indisponíveis."; break;
+                case error.TIMEOUT: msg += "A requisição demorou demais. Tente novamente em local aberto."; break;
+                default: msg += "Ocorreu um erro desconhecido."; break;
+            }
+            showAlert(msg);
+            toggleButtonLoading(button, false);
+        }
+
+        function getLocation(elementId, button) {
             if (navigator.geolocation) {
+                toggleButtonLoading(button, true);
+                const opts = { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 };
                 navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        document.getElementById(elementId).value = `${position.coords.latitude}, ${position.coords.longitude}`;
+                    (pos) => {
+                        document.getElementById(elementId).value = `${pos.coords.latitude}, ${pos.coords.longitude}`;
+                        toggleButtonLoading(button, false);
                     },
-                    handleLocationError
+                    (err) => handleLocationError(err, button),
+                    opts
                 );
             } else {
                 showAlert("Geolocalização não é suportada por este navegador.");
             }
         }
 
-        function getCTOLocation() {
+        function getCTOLocation(button) {
             if (navigator.geolocation) {
+                toggleButtonLoading(button, true);
+                const opts = { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 };
                 navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const lat = position.coords.latitude;
-                        const lon = position.coords.longitude;
+                    (pos) => {
+                        const lat = pos.coords.latitude;
+                        const lon = pos.coords.longitude;
                         document.getElementById('ctoCoordenadas').value = `${lat}, ${lon}`;
                         fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
-                            .then(response => response.json())
+                            .then(res => res.json())
                             .then(data => {
                                 if (data.address) {
                                     document.getElementById('bairro').value = data.address.suburb || data.address.neighbourhood || '';
                                     document.getElementById('rua').value = data.address.road || '';
                                 }
-                            }).catch(error => console.error('Erro ao buscar endereço:', error));
+                            }).catch(err => console.error('Erro ao buscar endereço:', err))
+                            .finally(() => toggleButtonLoading(button, false));
                     },
-                    handleLocationError
+                    (err) => handleLocationError(err, button),
+                    opts
                 );
             } else {
-                showAlert("Geolocalização não é suportada por este navegador.");
+                showAlert("Geolocalização não é suportada.");
+                toggleButtonLoading(button, false);
             }
         }
 
@@ -468,18 +447,11 @@
             let isValid = true;
             document.querySelectorAll('#onuForm .form-control, #onuForm .form-select').forEach(el => el.classList.remove('is-invalid'));
             const camposObrigatorios = ['cidade', 'modelo', 'tipoServico', 'plano', 'servico', 'cliente', 'serial', 'sinalCaixa', 'sinalOnu'];
-            if (document.getElementById('wifiField').style.display !== 'none') {
-                camposObrigatorios.push('wifi');
-            }
-            if (document.getElementById('senhaField').style.display !== 'none') {
-                camposObrigatorios.push('senha');
-            }
+            if (document.getElementById('wifiField').style.display !== 'none') { camposObrigatorios.push('wifi'); }
+            if (document.getElementById('senhaField').style.display !== 'none') { camposObrigatorios.push('senha'); }
             camposObrigatorios.forEach(id => {
                 const element = document.getElementById(id);
-                if (!element.value) {
-                    isValid = false;
-                    element.classList.add('is-invalid');
-                }
+                if (!element.value) { isValid = false; element.classList.add('is-invalid'); }
             });
             const wifiField = document.getElementById('wifiField');
             if (wifiField.style.display !== 'none') {
@@ -488,7 +460,7 @@
                 for (const word of forbiddenWords) {
                     const regex = new RegExp('\\b' + word + '\\b', 'i');
                     if (regex.test(wifiInput.value)) {
-                        showAlert('O nome da rede Wi-Fi contém uma expressão não permitida: "' + word + '". Por favor, escolha outro nome.');
+                        showAlert('O nome da rede Wi-Fi contém uma expressão não permitida: "' + word + '".');
                         wifiInput.classList.add('is-invalid');
                         return;
                     }
@@ -515,12 +487,8 @@
                     if (campo === "sinalCaixa") label = "Sinal Caixa";
                     if (campo === "sinalOnu") label = "Sinal ONU";
                     let valor = element.value;
-                    if (campo === 'sinalCaixa' || campo === 'sinalOnu') {
-                        valor = '-' + valor;
-                    }
-                    if (campo === 'serial') {
-                        valor = valor.toUpperCase();
-                    }
+                    if (campo === 'sinalCaixa' || campo === 'sinalOnu') { valor = '-' + valor; }
+                    if (campo === 'serial') { valor = valor.toUpperCase(); }
                     tabelaFormatada += `${label}: ${valor}\n`;
                 }
             });
@@ -531,9 +499,7 @@
         function copiarTabelaONU() {
             const tabela = document.getElementById('tabelaTextoONU').textContent;
             navigator.clipboard.writeText(tabela).then(() => {
-                showSuccess('Tabela copiada para a área de transferência!');
-            }, (err) => {
-                console.error('Erro ao copiar tabela ONU: ', err);
+                showSuccess('Tabela copiada!');
             });
         }
 
@@ -542,12 +508,9 @@
             if (window.Android && typeof window.Android.shareText === 'function') {
                 window.Android.shareText(textToShare);
             } else if (navigator.share && textToShare) {
-                navigator.share({
-                    title: 'Relatório de Instalação',
-                    text: textToShare
-                }).catch((error) => console.log('Erro ao compartilhar', error));
+                navigator.share({ title: 'Relatório de Instalação', text: textToShare });
             } else if (textToShare) {
-                showAlert('Função de compartilhamento não suportada. Use o botão "Copiar".');
+                showAlert('Compartilhamento não suportado.');
             }
         }
 
@@ -571,7 +534,7 @@
                 }
             });
             if (!isValid) {
-                showAlert('Por favor, preencha todos os campos obrigatórios destacados em vermelho.');
+                showAlert('Preencha os campos destacados.');
                 return;
             }
             let tabelaFormatada = `BAIRRO: ${document.getElementById('bairro').value.toUpperCase()}\n`;
@@ -593,9 +556,7 @@
         function copiarTabelaCTO() {
             const tabela = document.getElementById('tabelaTextoCTO').textContent;
             navigator.clipboard.writeText(tabela).then(() => {
-                showSuccess('Tabela copiada para a área de transferência!');
-            }, (err) => {
-                console.error('Erro ao copiar tabela: ', err);
+                showSuccess('Tabela copiada!');
             });
         }
 
@@ -604,12 +565,9 @@
             if (window.Android && typeof window.Android.shareText === 'function') {
                 window.Android.shareText(textToShare);
             } else if (navigator.share && textToShare) {
-                navigator.share({
-                    title: 'Relatório de Análise de CTO',
-                    text: textToShare
-                }).catch((error) => console.log('Erro ao compartilhar', error));
+                navigator.share({ title: 'Relatório de Análise de CTO', text: textToShare });
             } else if (textToShare) {
-                showAlert('Função de compartilhamento não suportada. Use o botão "Copiar".');
+                showAlert('Compartilhamento não suportado.');
             }
         }
 
@@ -622,4 +580,5 @@
         }
     </script>
 </body>
+
 </html>
