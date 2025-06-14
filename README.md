@@ -2,8 +2,11 @@
 
 > Uma ferramenta web e aplicativo Android desenvolvida para técnicos de telecomunicações, focada em agilizar e padronizar os processos de provisionamento de equipamentos e análise de caixas de atendimento.
 
-![Visão Geral do Aplicativo](https://i.imgur.com/uGzJ4Vp.png)
-*Pré-visualização da interface do aplicativo no modo claro e escuro.*
+### 🖼️ Pré-Visualização da Interface
+
+| Tela Principal | Modo Claro | Modo Noturno |
+| :---: | :---: | :---: |
+| ![Interface Principal](Interface.png) | ![Interface Modo Claro](Normal.png) | ![Interface Modo Noturno](Noturno.png) |
 
 ---
 
@@ -68,4 +71,4 @@ Este projeto é de uso interno e proprietário.
 
 ## 👤 Contato
 
-Desenvolvido e mantido por Luiz Paulo Xavier.
+Desenvolvido e mantido por [Seu Nome Aqui].
