@@ -71,4 +71,4 @@ Este projeto é de uso interno e proprietário.
 
 ## 👤 Contato
 
-Desenvolvido e mantido por [Seu Nome Aqui].
+Desenvolvido e mantido por Luiz Paulo Xavier.
