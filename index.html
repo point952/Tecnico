@@ -10,15 +10,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <link rel="stylesheet" href="style.css">
-    
     <link rel="manifest" href="manifest.json">
 
     <script>
-        (function() {
+        (function () {
             const theme = localStorage.getItem('theme');
             if (theme === 'dark') {
                 document.documentElement.classList.add('dark-theme');
@@ -28,13 +25,12 @@
 </head>
 
 <body>
-
     <main class="main-container">
         <div class="text-center">
-            <img src="coloridapoint.png" alt="Logo" class="main-logo mb-4">
+            <img src="coloridapoint.png" alt="Logo" class="main-logo mb-4"
+                onerror="this.onerror=null;this.src='https://placehold.co/251x58/cccccc/ffffff?text=Logo';">
             <h1 class="main-title">Sistema de Produção</h1>
             <p class="main-subtitle">Selecione uma opção para iniciar</p>
-
             <div class="menu-actions mt-5">
                 <button class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalInstalacao">
                     <span class="material-icons-outlined">add_circle</span>
@@ -42,27 +38,33 @@
                 </button>
                 <button class="btn btn-secondary-custom" data-bs-toggle="modal" data-bs-target="#modalAnaliseCTO">
                     <span class="material-icons-outlined">travel_explore</span>
-                    Análise de CTO
+                    Análise CTO
+                </button>
+                <button class="btn btn-tertiary-custom" data-bs-toggle="modal" data-bs-target="#modalRetornoTecnico">
+                    <span class="material-icons-outlined">fact_check</span>
+                    Retorno Técnico
                 </button>
             </div>
         </div>
     </main>
 
-    <div class="modal fade" id="modalInstalacao" tabindex="-1" aria-labelledby="modalInstalacaoLabel" aria-hidden="true">
+    <div class="modal fade" id="modalInstalacao" tabindex="-1" aria-labelledby="modalInstalacaoLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalInstalacaoLabel"><span class="material-icons-outlined">add_circle</span> Instalação / Upgrade</h5>
+                    <h5 class="modal-title" id="modalInstalacaoLabel"><span
+                            class="material-icons-outlined">add_circle</span> Instalação / Upgrade</h5>
                     <div class="header-buttons">
-                        <button class="theme-toggle-header-btn"><span class="material-icons-outlined">light_mode</span></button>
+                        <button class="theme-toggle-header-btn"><span
+                                class="material-icons-outlined">light_mode</span></button>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                 </div>
                 <div class="modal-body">
                     <form id="onuForm">
-                        <div class="mb-3">
-                            <label for="cidade" class="form-label">CIDADE:</label>
-                            <select class="form-select" id="cidade" required>
+                        <div class="mb-3"><label for="cidade" class="form-label">CIDADE:</label><select
+                                class="form-select" id="cidade" required>
                                 <option value="">Selecione a Cidade</option>
                                 <option value="ARINOS">ARINOS</option>
                                 <option value="BURITIS">BURITIS</option>
@@ -72,11 +74,9 @@
                                 <option value="PALMITAL">PALMITAL</option>
                                 <option value="UNAI">UNAI</option>
                                 <option value="URUANA">URUANA</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="modelo" class="form-label">MODELO:</label>
-                            <select class="form-select" id="modelo" required onchange="updateWifiFieldsVisibility()">
+                            </select></div>
+                        <div class="mb-3"><label for="modelo" class="form-label">MODELO:</label><select
+                                class="form-select" id="modelo" required onchange="updateWifiFieldsVisibility()">
                                 <option value="">Selecione o modelo</option>
                                 <option value="HG6143D">HG6143D</option>
                                 <option value="HG6143D3">HG6143D3</option>
@@ -84,22 +84,18 @@
                                 <option value="HG6145F3">HG6145F3</option>
                                 <option value="PLUS ROUTER">PLUS ROUTER</option>
                                 <option value="PLUS BRIDGE">PLUS BRIDGE</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="tipoServico" class="form-label">MODALIDADE:</label>
-                            <select class="form-select" id="tipoServico" required onchange="handleServiceTypeChange()">
+                            </select></div>
+                        <div class="mb-3"><label for="tipoServico" class="form-label">MODALIDADE:</label><select
+                                class="form-select" id="tipoServico" required onchange="handleServiceTypeChange()">
                                 <option value="">Selecione o tipo de serviço</option>
                                 <option value="Instalação">Instalação</option>
                                 <option value="Upgrade">Upgrade</option>
                                 <option value="Transferência">Transferência</option>
                                 <option value="Transferência+Upgrade">Transferência + Troca de ONU</option>
                                 <option value="Suporte">Suporte</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="plano" class="form-label">PLANO:</label>
-                            <select class="form-select" id="plano" required>
+                            </select></div>
+                        <div class="mb-3"><label for="plano" class="form-label">PLANO:</label><select
+                                class="form-select" id="plano" required>
                                 <option value="">Selecione o plano</option>
                                 <option value="100 Mega">100 Mega</option>
                                 <option value="300 Mega">300 Mega</option>
@@ -107,53 +103,35 @@
                                 <option value="700 Mega">700 Mega</option>
                                 <option value="800 Mega">800 Mega</option>
                                 <option value="1 GIGA">1 GIGA</option>
-                            </select>
+                            </select></div>
+                        <div class="mb-3"><label for="servico" class="form-label">SERVIÇO:</label><input type="number"
+                                class="form-control" id="servico" required></div>
+                        <div class="mb-3"><label for="cliente" class="form-label">CLIENTE:</label><input type="text"
+                                class="form-control" id="cliente" required></div>
+                        <div class="mb-3"><label for="serial" class="form-label">SERIAL:</label><input type="text"
+                                class="form-control" id="serial" required><small class="form-text helper-text">O serial
+                                sempre começa com FHTT.</small></div>
+                        <div class="mb-3"><label for="sinalCaixa" class="form-label">SINAL CAIXA:</label>
+                            <div class="input-group"><span class="input-group-text">-</span><input type="number"
+                                    class="form-control" id="sinalCaixa" required step="0.01"></div>
                         </div>
-                        <div class="mb-3">
-                            <label for="servico" class="form-label">SERVIÇO:</label>
-                            <input type="number" class="form-control" id="servico" required>
+                        <div class="mb-3"><label for="sinalOnu" class="form-label">SINAL ONU:</label>
+                            <div class="input-group"><span class="input-group-text">-</span><input type="number"
+                                    class="form-control" id="sinalOnu" required step="0.01"></div>
                         </div>
-                        <div class="mb-3">
-                            <label for="cliente" class="form-label">CLIENTE:</label>
-                            <input type="text" class="form-control" id="cliente" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="serial" class="form-label">SERIAL:</label>
-                            <input type="text" class="form-control" id="serial" required>
-                            <small class="form-text helper-text">O serial sempre começa com FHTT.</small>
-                        </div>
-                        <div class="mb-3">
-                            <label for="sinalCaixa" class="form-label">SINAL CAIXA:</label>
-                            <div class="input-group">
-                                <span class="input-group-text">-</span>
-                                <input type="number" class="form-control" id="sinalCaixa" required step="0.01">
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="sinalOnu" class="form-label">SINAL ONU:</label>
-                            <div class="input-group">
-                                <span class="input-group-text">-</span>
-                                <input type="number" class="form-control" id="sinalOnu" required step="0.01">
-                            </div>
-                        </div>
-                        <div class="mb-3" id="wifiField">
-                            <label for="wifi" class="form-label">WIFI:</label>
-                            <input type="text" class="form-control" id="wifi" maxlength="23">
-                            <small class="form-text helper-text">Limite máximo de 23 caracteres.</small>
-                        </div>
-                        <div class="mb-3" id="senhaField">
-                            <label for="senha" class="form-label">SENHA:</label>
-                            <input type="text" class="form-control" id="senha" minlength="8">
-                            <small class="form-text helper-text">A senha deve conter no mínimo 8 caracteres.</small>
-                        </div>
-                        <div class="mb-3">
-                            <label for="coordenadas" class="form-label">COORDENADAS:</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="coordenadas" readonly>
-                                <button class="btn btn-outline-secondary" type="button" id="getLocation">
-                                    <span class="spinner-border spinner-border-sm me-1" style="display: none;" role="status" aria-hidden="true"></span>
-                                    <span class="button-text"><span class="material-icons-outlined" style="font-size: 1.2rem; vertical-align: middle;">my_location</span></span>
-                                </button>
+                        <div class="mb-3" id="wifiField"><label for="wifi" class="form-label">WIFI:</label><input
+                                type="text" class="form-control" id="wifi" maxlength="23"><small
+                                class="form-text helper-text">Limite máximo de 23 caracteres.</small></div>
+                        <div class="mb-3" id="senhaField"><label for="senha" class="form-label">SENHA:</label><input
+                                type="text" class="form-control" id="senha" minlength="8"><small
+                                class="form-text helper-text">A senha deve conter no mínimo 8 caracteres.</small></div>
+                        <div class="mb-3"><label for="coordenadas" class="form-label">COORDENADAS:</label>
+                            <div class="input-group"><input type="text" class="form-control" id="coordenadas"
+                                    readonly><button class="btn btn-outline-secondary" type="button"
+                                    id="getLocation"><span class="spinner-border spinner-border-sm me-1"
+                                        style="display: none;" role="status" aria-hidden="true"></span><span
+                                        class="button-text"><span class="material-icons-outlined"
+                                            style="font-size: 1.2rem; vertical-align: middle;">my_location</span></span></button>
                             </div>
                         </div>
                     </form>
@@ -161,110 +139,159 @@
                         <h3 class="result-title">Tabela Gerada:</h3>
                         <pre id="tabelaTextoONU"></pre>
                         <div class="action-buttons mt-2">
-                            <button type="button" class="btn btn-info-custom" onclick="copiarTabelaONU()"><span class="material-icons-outlined">content_copy</span>Copiar</button>
-                            <button type="button" class="btn btn-share-custom" onclick="shareTabelaONU()"><span class="material-icons-outlined">share</span>Compartilhar</button>
+                            <button type="button" class="btn btn-info-custom" onclick="copiarTabelaONU()"><span
+                                    class="material-icons-outlined">content_copy</span>Copiar</button>
+                            <button type="button" class="btn btn-share-custom" onclick="shareTabelaONU()"><span
+                                    class="material-icons-outlined">share</span>Compartilhar</button>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-custom" onclick="limparCamposONU()">Limpar</button>
-                    <button type="button" class="btn btn-success-custom" onclick="gerarTabelaONU()">Gerar Tabela</button>
-                </div>
+                <div class="modal-footer"><button type="button" class="btn btn-light-custom"
+                        onclick="limparCamposONU()">Limpar</button><button type="button" class="btn btn-success-custom"
+                        onclick="gerarTabelaONU()">Gerar Tabela</button></div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="modalAnaliseCTO" tabindex="-1" aria-labelledby="modalAnaliseCTOLabel" aria-hidden="true">
+    <div class="modal fade" id="modalAnaliseCTO" tabindex="-1" aria-labelledby="modalAnaliseCTOLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalAnaliseCTOLabel"><span class="material-icons-outlined">travel_explore</span> Análise de CTO</h5>
+                    <h5 class="modal-title" id="modalAnaliseCTOLabel"><span
+                            class="material-icons-outlined">travel_explore</span> Análise de CTO</h5>
                     <div class="header-buttons">
-                        <button class="theme-toggle-header-btn"><span class="material-icons-outlined">light_mode</span></button>
+                        <button class="theme-toggle-header-btn"><span
+                                class="material-icons-outlined">light_mode</span></button>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                 </div>
                 <div class="modal-body">
                     <form id="ctoForm">
-                        <div class="mb-3">
-                            <label for="tipoSplitter" class="form-label">Tipo de Splitter:</label>
-                            <select class="form-select" id="tipoSplitter" required onchange="toggleServiceFields()">
+                        <div class="mb-3"><label for="tipoSplitterCTO" class="form-label">Tipo de
+                                Splitter:</label><select class="form-select" id="tipoSplitterCTO" required
+                                onchange="toggleServiceFieldsCTO()">
                                 <option value="">Selecione o tipo de splitter</option>
                                 <option value="1/8">1/8</option>
                                 <option value="1/16">1/16</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="bairro" class="form-label">BAIRRO:</label>
-                            <input type="text" class="form-control" id="bairro" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="rua" class="form-label">RUA:</label>
-                            <input type="text" class="form-control" id="rua" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="ctoCoordenadas" class="form-label">COORDENADAS:</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="ctoCoordenadas" readonly>
-                                <button class="btn btn-outline-secondary" type="button" id="getCTOLocation">
-                                    <span class="spinner-border spinner-border-sm me-1" style="display: none;" role="status" aria-hidden="true"></span>
-                                    <span class="button-text"><span class="material-icons-outlined" style="font-size: 1.2rem; vertical-align: middle;">my_location</span></span>
-                                </button>
+                            </select></div>
+                        <div class="mb-3"><label for="bairro" class="form-label">BAIRRO:</label><input type="text"
+                                class="form-control" id="bairro" required></div>
+                        <div class="mb-3"><label for="rua" class="form-label">RUA:</label><input type="text"
+                                class="form-control" id="rua" required></div>
+                        <div class="mb-3"><label for="ctoCoordenadas" class="form-label">COORDENADAS:</label>
+                            <div class="input-group"><input type="text" class="form-control" id="ctoCoordenadas"
+                                    readonly><button class="btn btn-outline-secondary" type="button"
+                                    id="getCTOLocation"><span class="spinner-border spinner-border-sm me-1"
+                                        style="display: none;" role="status" aria-hidden="true"></span><span
+                                        class="button-text"><span class="material-icons-outlined"
+                                            style="font-size: 1.2rem; vertical-align: middle;">my_location</span></span></button>
                             </div>
                         </div>
-                        <div id="servicosCliente"></div>
+                        <div id="servicosClienteCTO"></div>
                     </form>
                     <div id="resultadoTabelaCTO" class="mt-4" style="display: none;">
                         <h3 class="result-title">Tabela Gerada:</h3>
                         <pre id="tabelaTextoCTO"></pre>
                         <div class="action-buttons mt-2">
-                            <button type="button" class="btn btn-info-custom" onclick="copiarTabelaCTO()"><span class="material-icons-outlined">content_copy</span>Copiar</button>
-                            <button type="button" class="btn btn-share-custom" onclick="shareTabelaCTO()"><span class="material-icons-outlined">share</span>Compartilhar</button>
+                            <button type="button" class="btn btn-info-custom" onclick="copiarTabelaCTO()"><span
+                                    class="material-icons-outlined">content_copy</span>Copiar</button>
+                            <button type="button" class="btn btn-share-custom" onclick="shareTabelaCTO()"><span
+                                    class="material-icons-outlined">share</span>Compartilhar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button type="button" class="btn btn-light-custom"
+                        onclick="limparCamposCTO()">Limpar</button><button type="button" class="btn btn-success-custom"
+                        onclick="gerarTabelaCTO()">Gerar Tabela</button></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalRetornoTecnico" tabindex="-1" aria-labelledby="modalRetornoTecnicoLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalRetornoTecnicoLabel"><span
+                            class="material-icons-outlined">fact_check</span> Retorno Técnico</h5>
+                    <div class="header-buttons">
+                        <button class="theme-toggle-header-btn"><span
+                                class="material-icons-outlined">light_mode</span></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form id="retornoForm">
+                        <div class="mb-3">
+                            <label for="tipoSplitterRetorno" class="form-label">Tipo de Splitter:</label>
+                            <select class="form-select" id="tipoSplitterRetorno" required
+                                onchange="handleSplitterChangeRetorno()">
+                                <option value="" selected>Selecione o tipo</option>
+                                <option value="1/8">1/8</option>
+                                <option value="1/16">1/16</option>
+                            </select>
+                        </div>
+                        <hr />
+                        <div id="servicosContainerRetorno"></div>
+                    </form>
+                    <div id="resultadoTabelaRetorno" class="mt-4" style="display: none;">
+                        <h3 class="result-title">Tabela Gerada:</h3>
+                        <pre id="tabelaTextoRetorno"></pre>
+                        <div class="action-buttons mt-2">
+                            <button type="button" class="btn btn-info-custom" onclick="copiarTabelaRetorno()"><span
+                                    class="material-icons-outlined">content_copy</span>Copiar</button>
+                            <button type="button" class="btn btn-share-custom" onclick="shareTabelaRetorno()"><span
+                                    class="material-icons-outlined">share</span>Compartilhar</button>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light-custom" onclick="limparCamposCTO()">Limpar</button>
-                    <button type="button" class="btn btn-success-custom" onclick="gerarTabelaCTO()">Gerar Tabela</button>
+                    <button type="button" class="btn btn-light-custom" onclick="limparCamposRetorno()">Limpar</button>
+                    <button type="button" class="btn btn-success-custom" onclick="gerarTabelaRetorno()">Gerar
+                        Tabela</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="modalConfirmWifiChange" tabindex="-1" aria-labelledby="modalConfirmLabel" aria-hidden="true">
+    <div class="modal fade" id="modalConfirmWifiChange" tabindex="-1" aria-labelledby="modalConfirmLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header"><h5 class="modal-title" id="modalConfirmLabel"><span class="material-icons-outlined">wifi_password</span> Alteração de Wi-Fi/Senha</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalConfirmLabel"><span
+                            class="material-icons-outlined">wifi_password</span> Alteração de Wi-Fi/Senha</h5><button
+                        type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <p>Para esta modalidade, será necessário alterar o nome da rede Wi-Fi e a senha?</p>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-custom" id="btnNaoAlterarWifi" data-bs-dismiss="modal">Não</button>
-                    <button type="button" class="btn btn-success-custom" id="btnSimAlterarWifi" data-bs-dismiss="modal">Sim</button>
-                </div>
+                <div class="modal-footer"><button type="button" class="btn btn-light-custom" id="btnNaoAlterarWifi"
+                        data-bs-dismiss="modal">Não</button><button type="button" class="btn btn-success-custom"
+                        id="btnSimAlterarWifi" data-bs-dismiss="modal">Sim</button></div>
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header-alert">
-                    <h5 class="modal-title-alert" id="alertModalLabel"><span class="material-icons-outlined alert-icon">warning</span> Atenção</h5>
+                    <h5 class="modal-title-alert" id="alertModalLabel"><span
+                            class="material-icons-outlined alert-icon">warning</span> Atenção</h5>
                 </div>
                 <div class="modal-body" id="alertModalBody"></div>
-                <div class="modal-footer-alert"><button type="button" class="btn btn-warning-custom" data-bs-dismiss="modal">Entendi</button></div>
+                <div class="modal-footer-alert"><button type="button" class="btn btn-warning-custom"
+                        data-bs-dismiss="modal">Entendi</button></div>
             </div>
         </div>
     </div>
-    
     <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header-success">
-                    <h5 class="modal-title-success" id="successModalLabel"><span class="material-icons-outlined success-icon">check_circle</span> Sucesso</h5>
+                    <h5 class="modal-title-success" id="successModalLabel"><span
+                            class="material-icons-outlined success-icon">check_circle</span> Sucesso</h5>
                 </div>
                 <div class="modal-body" id="successModalBody"></div>
             </div>
@@ -274,24 +301,55 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
     <script>
+        // --- Escopo Global ---
         let confirmModal, alertModal, successModal;
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Inicialização dos Modais do Bootstrap
+        // --- Funções de Inicialização ---
+        document.addEventListener('DOMContentLoaded', function () {
+            initModals();
+            initTheme();
+            initAnimations();
+            initEventListeners();
+            createDynamicFields();
+        });
+
+        function initModals() {
             confirmModal = new bootstrap.Modal(document.getElementById('modalConfirmWifiChange'));
             alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
             successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        }
 
-            // Preenche os campos de porta da CTO dinamicamente
-            const servicosClienteDiv = document.getElementById('servicosCliente');
-            for (let i = 1; i <= 16; i++) {
-                servicosClienteDiv.innerHTML += `<div class="mb-3" style="display: none;"><label for="servico${i}" class="form-label">Porta ${i}:</label><input type="text" class="form-control" id="servico${i}"></div>`;
-            }
+        function initTheme() {
+            const themeToggleButtons = document.querySelectorAll('.theme-toggle-header-btn');
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            const isDark = currentTheme === 'dark';
 
-            // Garante que a visibilidade dos campos de WiFi/Senha esteja correta ao carregar
-            updateWifiFieldsVisibility();
+            document.documentElement.classList.toggle('dark-theme', isDark);
+            themeToggleButtons.forEach(btn => {
+                btn.querySelector('.material-icons-outlined').textContent = isDark ? 'light_mode' : 'dark_mode';
+            });
 
-            // Adiciona eventos aos botões do modal de confirmação
+            themeToggleButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    anime({ targets: btn.querySelector('.material-icons-outlined'), rotate: '1turn', duration: 500, easing: 'easeInOutSine' });
+                    document.documentElement.classList.toggle('dark-theme');
+                    let newTheme = document.documentElement.classList.contains('dark-theme') ? 'dark' : 'light';
+                    let newIcon = newTheme === 'dark' ? 'light_mode' : 'dark_mode';
+                    themeToggleButtons.forEach(b => b.querySelector('.material-icons-outlined').textContent = newIcon);
+                    localStorage.setItem('theme', newTheme);
+                });
+            });
+        }
+
+        function initAnimations() {
+            const mainTimeline = anime.timeline({ easing: 'easeOutExpo', duration: 1000 });
+            mainTimeline.add({ targets: '.main-logo', opacity: [0, 1], scale: [0.8, 1] })
+                .add({ targets: '.main-title', opacity: [0, 1], translateY: [-20, 0] }, '-=800')
+                .add({ targets: '.main-subtitle', opacity: [0, 1], translateY: [-20, 0] }, '-=700')
+                .add({ targets: '.menu-actions .btn', opacity: [0, 1], translateY: [-20, 0], delay: anime.stagger(150) }, '-=600');
+        }
+
+        function initEventListeners() {
             document.getElementById('btnSimAlterarWifi').addEventListener('click', () => {
                 document.getElementById('wifiField').style.display = 'block';
                 document.getElementById('senhaField').style.display = 'block';
@@ -300,53 +358,21 @@
                 document.getElementById('wifiField').style.display = 'none';
                 document.getElementById('senhaField').style.display = 'none';
             });
-
-            // Lógica do Tema Noturno
-            const themeToggleButtons = document.querySelectorAll('.theme-toggle-header-btn');
-            const currentTheme = localStorage.getItem('theme');
-            const isDark = currentTheme === 'dark';
-            themeToggleButtons.forEach(btn => {
-                btn.querySelector('.material-icons-outlined').textContent = isDark ? 'light_mode' : 'dark_mode';
-            });
-            themeToggleButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    anime({ targets: btn.querySelector('.material-icons-outlined'), rotate: '1turn', duration: 500, easing: 'easeInOutSine' });
-                    document.documentElement.classList.toggle('dark-theme');
-                    let newTheme = 'light', newIcon = 'dark_mode';
-                    if (document.documentElement.classList.contains('dark-theme')) {
-                        newTheme = 'dark';
-                        newIcon = 'light_mode';
-                    }
-                    themeToggleButtons.forEach(b => b.querySelector('.material-icons-outlined').textContent = newIcon);
-                    localStorage.setItem('theme', newTheme);
-                });
-            });
-
-            // Animações de Entrada com Anime.js
-            const mainTimeline = anime.timeline({ easing: 'easeOutExpo', duration: 1000 });
-            mainTimeline.add({ targets: '.main-logo', opacity: [0, 1], scale: [0.8, 1] })
-                      .add({ targets: '.main-title', opacity: [0, 1], translateY: [-20, 0] }, '-=800')
-                      .add({ targets: '.main-subtitle', opacity: [0, 1], translateY: [-20, 0] }, '-=700')
-                      .add({ targets: '.menu-actions .btn', opacity: [0, 1], translateY: [-20, 0], delay: anime.stagger(150) }, '-=600');
-            
-            // Listeners para os botões de geolocalização
-            document.getElementById('getLocation').addEventListener('click', function() { getLocation('coordenadas', this); });
-            document.getElementById('getCTOLocation').addEventListener('click', function() { getCTOLocation(this); });
-        });
-
-        function showAlert(message) {
-            document.getElementById('alertModalBody').textContent = message;
-            alertModal.show();
+            document.getElementById('getLocation').addEventListener('click', function () { getLocation('coordenadas', this); });
+            document.getElementById('getCTOLocation').addEventListener('click', function () { getCTOLocation(this); });
         }
 
-        function showSuccess(message) {
-            document.getElementById('successModalBody').textContent = message;
-            successModal.show();
-            setTimeout(() => {
-                successModal.hide();
-            }, 2000);
+        function createDynamicFields() {
+            const servicosClienteDiv = document.getElementById('servicosClienteCTO');
+            for (let i = 1; i <= 16; i++) {
+                servicosClienteDiv.innerHTML += `<div class="mb-3" style="display: none;"><label for="servicoCTO${i}" class="form-label">Porta ${i}:</label><input type="text" class="form-control" id="servicoCTO${i}"></div>`;
+            }
+            updateWifiFieldsVisibility();
         }
 
+        // --- Funções Auxiliares ---
+        function showAlert(message) { document.getElementById('alertModalBody').textContent = message; alertModal.show(); }
+        function showSuccess(message) { document.getElementById('successModalBody').textContent = message; successModal.show(); setTimeout(() => { successModal.hide(); }, 2000); }
         function toggleButtonLoading(button, isLoading) {
             if (!button) return;
             const spinner = button.querySelector('.spinner-border');
@@ -355,7 +381,6 @@
             if (spinner) spinner.style.display = isLoading ? 'inline-block' : 'none';
             if (text) text.style.display = isLoading ? 'none' : 'inline-block';
         }
-
         function handleLocationError(error, button) {
             let msg = "Não foi possível obter a localização. ";
             switch (error.code) {
@@ -368,31 +393,21 @@
             toggleButtonLoading(button, false);
         }
 
+        // --- Funções de Geolocalização ---
         function getLocation(elementId, button) {
             if (navigator.geolocation) {
                 toggleButtonLoading(button, true);
                 const opts = { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 };
-                navigator.geolocation.getCurrentPosition(
-                    (pos) => {
-                        document.getElementById(elementId).value = `${pos.coords.latitude}, ${pos.coords.longitude}`;
-                        toggleButtonLoading(button, false);
-                    },
-                    (err) => handleLocationError(err, button),
-                    opts
-                );
-            } else {
-                showAlert("Geolocalização não é suportada por este navegador.");
-            }
+                navigator.geolocation.getCurrentPosition((pos) => { document.getElementById(elementId).value = `${pos.coords.latitude}, ${pos.coords.longitude}`; toggleButtonLoading(button, false); }, (err) => handleLocationError(err, button), opts);
+            } else { showAlert("Geolocalização não é suportada por este navegador."); }
         }
-
         function getCTOLocation(button) {
             if (navigator.geolocation) {
                 toggleButtonLoading(button, true);
                 const opts = { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 };
                 navigator.geolocation.getCurrentPosition(
                     (pos) => {
-                        const lat = pos.coords.latitude;
-                        const lon = pos.coords.longitude;
+                        const lat = pos.coords.latitude; const lon = pos.coords.longitude;
                         document.getElementById('ctoCoordenadas').value = `${lat}, ${lon}`;
                         fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
                             .then(res => res.json())
@@ -407,196 +422,124 @@
                     (err) => handleLocationError(err, button),
                     opts
                 );
-            } else {
-                showAlert("Geolocalização não é suportada.");
-                toggleButtonLoading(button, false);
-            }
+            } else { showAlert("Geolocalização não é suportada."); toggleButtonLoading(button, false); }
         }
 
-        function updateWifiFieldsVisibility() {
-            const modeloSelect = document.getElementById('modelo').value;
-            const wifiField = document.getElementById('wifiField');
-            const senhaField = document.getElementById('senhaField');
-            if (modeloSelect === 'PLUS ROUTER' || modeloSelect === 'PLUS BRIDGE') {
-                wifiField.style.display = 'none';
-                senhaField.style.display = 'none';
-            } else {
-                wifiField.style.display = 'block';
-                senhaField.style.display = 'block';
-            }
-        }
-
-        function handleServiceTypeChange() {
-            updateWifiFieldsVisibility();
-            const tipoServico = document.getElementById('tipoServico').value;
-            const wifiField = document.getElementById('wifiField');
-            const shouldAsk = tipoServico === 'Suporte' || tipoServico === 'Transferência' || tipoServico === 'Transferência+Upgrade' || tipoServico === 'Upgrade';
-            if (shouldAsk && wifiField.style.display !== 'none') {
-                confirmModal.show();
-            }
-        }
-
-        function toggleServiceFields() {
-            const splitterType = document.getElementById('tipoSplitter').value;
-            const serviceFields = document.querySelectorAll('#servicosCliente .mb-3');
-            serviceFields.forEach((field, index) => {
-                const limit = splitterType === '1/8' ? 8 : (splitterType === '1/16' ? 16 : 0);
-                field.style.display = index < limit ? 'block' : 'none';
-            });
-        }
-
+        // --- Funções: Instalação / Upgrade ---
+        function updateWifiFieldsVisibility() { const m = document.getElementById('modelo').value; const w = document.getElementById('wifiField'); const s = document.getElementById('senhaField'); if (m === 'PLUS ROUTER' || m === 'PLUS BRIDGE') { w.style.display = 'none'; s.style.display = 'none'; } else { w.style.display = 'block'; s.style.display = 'block'; } }
+        function handleServiceTypeChange() { updateWifiFieldsVisibility(); const t = document.getElementById('tipoServico').value; const w = document.getElementById('wifiField'); const a = t === 'Suporte' || t === 'Transferência' || t === 'Transferência+Upgrade' || t === 'Upgrade'; if (a && w.style.display !== 'none') { confirmModal.show(); } }
         function gerarTabelaONU() {
-            let isValid = true;
             document.querySelectorAll('#onuForm .form-control, #onuForm .form-select').forEach(el => el.classList.remove('is-invalid'));
             const camposObrigatorios = ['cidade', 'modelo', 'tipoServico', 'plano', 'servico', 'cliente', 'serial', 'sinalCaixa', 'sinalOnu'];
             if (document.getElementById('wifiField').style.display !== 'none') { camposObrigatorios.push('wifi'); }
             if (document.getElementById('senhaField').style.display !== 'none') { camposObrigatorios.push('senha'); }
-            camposObrigatorios.forEach(id => {
-                const element = document.getElementById(id);
-                if (!element.value) { isValid = false; element.classList.add('is-invalid'); }
-            });
-            const wifiField = document.getElementById('wifiField');
-            if (wifiField.style.display !== 'none') {
+
+            let isValid = true;
+            camposObrigatorios.forEach(id => { const element = document.getElementById(id); if (!element.value) { isValid = false; element.classList.add('is-invalid'); } });
+
+            if (document.getElementById('wifiField').style.display !== 'none') {
                 const forbiddenWords = ['sem internet', 'sem sinal', 'sinal fraco', 'sinal ruim', 'caiu', 'caindo', 'lento', 'travando', 'bugado', 'falhando', 'pessimo', 'horrivel', 'desconectado', 'problema', 'ruim', 'lixo', 'porcaria', 'droga', 'quebrado', 'defeito', 'nao funciona', 'sem net', 'bosta', 'merda', 'puta', 'caralho', 'foder', 'fdp', 'cu', 'porra', 'kct', 'buceta', 'pqp', 'vsf', 'arrombado', 'desgraça', 'inferno', 'demonio', 'viado', 'virus', 'vivo', 'claro', 'tim', 'oi', 'sky', 'hughesnet', 'starlink', 'algar', 'brisanet', 'vero', 'admin', 'suporte', 'padrao', 'default', 'convidado', 'guest', 'teste', 'root', 'password', 'senha', 'tecnico', 'point', 'vazio', 'null', 'undefined', 'hacker', 'roubado', 'gatonet', 'ilegal', 'pirata', 'cracked', 'gratis', 'free'];
                 const wifiInput = document.getElementById('wifi');
                 for (const word of forbiddenWords) {
                     const regex = new RegExp('\\b' + word + '\\b', 'i');
-                    if (regex.test(wifiInput.value)) {
-                        showAlert('O nome da rede Wi-Fi contém uma expressão não permitida: "' + word + '".');
-                        wifiInput.classList.add('is-invalid');
-                        return;
-                    }
+                    if (regex.test(wifiInput.value)) { showAlert('O nome da rede Wi-Fi contém uma expressão não permitida: "' + word + '".'); wifiInput.classList.add('is-invalid'); return; }
                 }
             }
-            const senhaField = document.getElementById('senha');
-            if (document.getElementById('senhaField').style.display !== 'none' && senhaField.value.length < 8) {
-                isValid = false;
-                senhaField.classList.add('is-invalid');
-                showAlert('A senha deve conter no mínimo 8 caracteres.');
-                return;
-            }
-            if (!isValid) {
-                showAlert('Por favor, preencha todos os campos obrigatórios destacados em vermelho.');
-                return;
-            }
+            const senhaInput = document.getElementById('senha');
+            if (document.getElementById('senhaField').style.display !== 'none' && senhaInput.value.length < 8) { showAlert('A senha deve conter no mínimo 8 caracteres.'); senhaInput.classList.add('is-invalid'); return; }
+            if (!isValid) { showAlert('Por favor, preencha todos os campos obrigatórios destacados em vermelho.'); return; }
+
             const campos = ['servico', 'cidade', 'tipoServico', 'modelo', 'plano', 'cliente', 'serial', 'sinalCaixa', 'sinalOnu', 'wifi', 'senha', 'coordenadas'];
             let tabelaFormatada = '';
-            campos.forEach(campo => {
-                const element = document.getElementById(campo);
-                if (element && element.offsetParent !== null && element.value) {
-                    let label = campo.charAt(0).toUpperCase() + campo.slice(1);
-                    if (campo === "tipoServico") label = "Modalidade";
-                    if (campo === "sinalCaixa") label = "Sinal Caixa";
-                    if (campo === "sinalOnu") label = "Sinal ONU";
-                    let valor = element.value;
-                    if (campo === 'sinalCaixa' || campo === 'sinalOnu') { valor = '-' + valor; }
-                    if (campo === 'serial') { valor = valor.toUpperCase(); }
-                    tabelaFormatada += `${label}: ${valor}\n`;
-                }
-            });
+            campos.forEach(campo => { const e = document.getElementById(campo); if (e && e.offsetParent !== null && e.value) { let l = campo.charAt(0).toUpperCase() + campo.slice(1); if (campo === "tipoServico") l = "Modalidade"; if (campo === "sinalCaixa") l = "Sinal Caixa"; if (campo === "sinalOnu") l = "Sinal ONU"; let v = e.value; if (campo === 'sinalCaixa' || campo === 'sinalOnu') v = '-' + v; if (campo === 'serial') v = v.toUpperCase(); tabelaFormatada += `${l}: ${v}\n`; } });
             document.getElementById('tabelaTextoONU').textContent = tabelaFormatada.trim();
             document.getElementById('resultadoTabelaONU').style.display = 'block';
         }
+        function copiarTabelaONU() { const t = document.getElementById('tabelaTextoONU').textContent; navigator.clipboard.writeText(t).then(() => { showSuccess('Tabela copiada!'); }); }
+        function shareTabelaONU() { const t = document.getElementById('tabelaTextoONU').textContent; if (window.Android && typeof window.Android.shareText === 'function') { window.Android.shareText(t); } else if (navigator.share && t) { navigator.share({ title: 'Relatório de Instalação', text: t }); } else if (t) { showAlert('Compartilhamento não suportado.'); } }
+        function limparCamposONU() { document.getElementById('onuForm').reset(); document.querySelectorAll('#onuForm .form-control, #onuForm .form-select').forEach(el => el.classList.remove('is-invalid')); document.getElementById('resultadoTabelaONU').style.display = 'none'; updateWifiFieldsVisibility(); }
 
-        function copiarTabelaONU() {
-            const tabela = document.getElementById('tabelaTextoONU').textContent;
-            navigator.clipboard.writeText(tabela).then(() => {
-                showSuccess('Tabela copiada!');
-            });
-        }
-
-        function shareTabelaONU() {
-            const textToShare = document.getElementById('tabelaTextoONU').textContent;
-            if (window.Android && typeof window.Android.shareText === 'function') {
-                window.Android.shareText(textToShare);
-            } else if (navigator.share && textToShare) {
-                navigator.share({ title: 'Relatório de Instalação', text: textToShare });
-            } else if (textToShare) {
-                showAlert('Compartilhamento não suportado.');
-            }
-        }
-
-        function limparCamposONU() {
-            const form = document.getElementById('onuForm');
-            form.reset();
-            document.querySelectorAll('#onuForm .form-control, #onuForm .form-select').forEach(el => el.classList.remove('is-invalid'));
-            document.getElementById('resultadoTabelaONU').style.display = 'none';
-            updateWifiFieldsVisibility();
-        }
-
+        // --- FUNÇÕES: ANÁLISE CTO ---
+        function toggleServiceFieldsCTO() { const t = document.getElementById('tipoSplitterCTO').value; const s = document.querySelectorAll('#servicosClienteCTO .mb-3'); s.forEach((f, i) => { const l = t === '1/8' ? 8 : (t === '1/16' ? 16 : 0); f.style.display = i < l ? 'block' : 'none'; }); }
         function gerarTabelaCTO() {
-            let isValid = true;
-            const camposObrigatorios = ['tipoSplitter', 'bairro', 'rua'];
+            let v = true; const c = ['tipoSplitterCTO', 'bairro', 'rua'];
             document.querySelectorAll('#ctoForm .form-control, #ctoForm .form-select').forEach(el => el.classList.remove('is-invalid'));
-            camposObrigatorios.forEach(id => {
-                const element = document.getElementById(id);
-                if (!element.value) {
-                    isValid = false;
-                    element.classList.add('is-invalid');
-                }
-            });
-            if (!isValid) {
-                showAlert('Preencha os campos destacados.');
-                return;
-            }
-            let tabelaFormatada = `BAIRRO: ${document.getElementById('bairro').value.toUpperCase()}\n`;
-            tabelaFormatada += `RUA: ${document.getElementById('rua').value.toUpperCase()}\n`;
-            const coordenadas = document.getElementById('ctoCoordenadas').value;
-            if (coordenadas) {
-                tabelaFormatada += `COORDENADAS: ${coordenadas}\n\n`;
-            }
-            const splitterType = document.getElementById('tipoSplitter').value;
-            const limit = splitterType === '1/8' ? 8 : 16;
-            for (let i = 1; i <= limit; i++) {
-                const servico = document.getElementById(`servico${i}`).value;
-                tabelaFormatada += `Porta ${i}: ${servico}\n`;
-            }
-            document.getElementById('tabelaTextoCTO').textContent = tabelaFormatada.trim();
+            c.forEach(i => { const e = document.getElementById(i); if (!e.value) { v = false; e.classList.add('is-invalid'); } });
+            if (!v) { showAlert('Preencha os campos destacados.'); return; }
+            let t = `BAIRRO: ${document.getElementById('bairro').value.toUpperCase()}\n`;
+            t += `RUA: ${document.getElementById('rua').value.toUpperCase()}\n`;
+            const o = document.getElementById('ctoCoordenadas').value;
+            if (o) { t += `COORDENADAS: ${o}\n\n`; }
+            const n = document.getElementById('tipoSplitterCTO').value;
+            const l = n === '1/8' ? 8 : 16;
+            for (let i = 1; i <= l; i++) { const s = document.getElementById(`servicoCTO${i}`).value; t += `Porta ${i}: ${s}\n`; }
+            document.getElementById('tabelaTextoCTO').textContent = t.trim();
             document.getElementById('resultadoTabelaCTO').style.display = 'block';
         }
+        function copiarTabelaCTO() { const t = document.getElementById('tabelaTextoCTO').textContent; navigator.clipboard.writeText(t).then(() => { showSuccess('Tabela copiada!'); }); }
+        function shareTabelaCTO() { const t = document.getElementById('tabelaTextoCTO').textContent; if (window.Android && typeof window.Android.shareText === 'function') { window.Android.shareText(t); } else if (navigator.share && t) { navigator.share({ title: 'Relatório de Análise de CTO', text: t }); } else if (t) { showAlert('Compartilhamento não suportado.'); } }
+        function limparCamposCTO() { document.getElementById('ctoForm').reset(); document.querySelectorAll('#ctoForm .form-control, #ctoForm .form-select').forEach(el => el.classList.remove('is-invalid')); document.getElementById('resultadoTabelaCTO').style.display = 'none'; toggleServiceFieldsCTO(); }
 
-        function copiarTabelaCTO() {
-            const tabela = document.getElementById('tabelaTextoCTO').textContent;
-            navigator.clipboard.writeText(tabela).then(() => {
-                showSuccess('Tabela copiada!');
-            });
-        }
-
-        function shareTabelaCTO() {
-            const textToShare = document.getElementById('tabelaTextoCTO').textContent;
-            if (window.Android && typeof window.Android.shareText === 'function') {
-                window.Android.shareText(textToShare);
-            } else if (navigator.share && textToShare) {
-                navigator.share({ title: 'Relatório de Análise de CTO', text: textToShare });
-            } else if (textToShare) {
-                showAlert('Compartilhamento não suportado.');
+        // --- FUNÇÕES: RETORNO TÉCNICO ---
+        function handleSplitterChangeRetorno() {
+            const splitterType = document.getElementById('tipoSplitterRetorno').value;
+            const container = document.getElementById('servicosContainerRetorno');
+            container.innerHTML = '';
+            const numPorts = splitterType === '1/8' ? 8 : (splitterType === '1/16' ? 16 : 0);
+            if (numPorts > 0) {
+                for (let i = 1; i <= numPorts; i++) { adicionarServicoRetorno(i); }
             }
         }
-
-        function limparCamposCTO() {
-            const form = document.getElementById('ctoForm');
-            form.reset();
-            document.querySelectorAll('#ctoForm .form-control, #ctoForm .form-select').forEach(el => el.classList.remove('is-invalid'));
-            document.getElementById('resultadoTabelaCTO').style.display = 'none';
-            toggleServiceFields();
+        function adicionarServicoRetorno(portNumber) {
+            const container = document.getElementById('servicosContainerRetorno');
+            const newRow = document.createElement('div');
+            newRow.className = 'row g-2 mb-3 align-items-center dynamic-service-row';
+            newRow.style.opacity = 0;
+            newRow.innerHTML = `<div class="col-2 col-md-1 text-end"><label class="form-label mb-0">P${portNumber}:</label></div><div class="col-10 col-md-7"><input type="text" class="form-control service-input" placeholder="Serviço do cliente"></div><div class="col-12 col-md-4"><label class="form-label visually-hidden">Status</label><select class="form-select status-select"><option value="Online" selected>Online</option><option value="Offline">Offline</option><option value="Não encontrado">Não encontrado</option></select></div>`;
+            container.appendChild(newRow);
+            anime({ targets: newRow, opacity: 1, duration: 400, easing: 'easeOutExpo' });
         }
+        function gerarTabelaRetorno() {
+            const splitterType = document.getElementById('tipoSplitterRetorno').value;
+            if (!splitterType) { showAlert('Por favor, selecione um tipo de splitter primeiro.'); return; }
+            const servicosRows = document.querySelectorAll('#servicosContainerRetorno .dynamic-service-row');
+            if (servicosRows.length === 0) { showAlert('Não há campos de serviço para gerar a tabela.'); return; }
+            let tabelaFormatada = `RETORNO TÉCNICO - ${new Date().toLocaleDateString('pt-BR')}\n`;
+            tabelaFormatada += `SPLITTER: ${splitterType}\n\n`;
+            let hasValidEntries = false;
+            servicosRows.forEach((row, index) => {
+                const servicoInput = row.querySelector('.service-input');
+                const statusSelect = row.querySelector('.status-select');
+                const servicoValor = servicoInput.value.trim();
+                if (servicoValor) {
+                    hasValidEntries = true;
+                    tabelaFormatada += `Porta ${index + 1}: ${servicoValor.toUpperCase()}\n`;
+                    tabelaFormatada += `Status: ${statusSelect.value}\n\n`;
+                }
+            });
+            if (!hasValidEntries) { showAlert('Por favor, preencha as informações de pelo menos um serviço.'); return; }
+            document.getElementById('tabelaTextoRetorno').textContent = tabelaFormatada.trim();
+            document.getElementById('resultadoTabelaRetorno').style.display = 'block';
+        }
+        function copiarTabelaRetorno() { const t = document.getElementById('tabelaTextoRetorno').textContent; if (t) { navigator.clipboard.writeText(t).then(() => showAlert('Tabela copiada!')); } }
+        function shareTabelaRetorno() {
+            const textToShare = document.getElementById('tabelaTextoRetorno').textContent;
+            if (window.Android && typeof window.Android.shareText === 'function') { window.Android.shareText(textToShare); }
+            else if (navigator.share && textToShare) { navigator.share({ title: 'Relatório de Retorno Técnico', text: textToShare }); }
+            else if (textToShare) { showAlert('Compartilhamento não suportado. Tabela copiada para a área de transferência.'); copiarTabelaRetorno(); }
+        }
+        function limparCamposRetorno() { document.getElementById('tipoSplitterRetorno').value = ''; document.getElementById('servicosContainerRetorno').innerHTML = ''; document.getElementById('resultadoTabelaRetorno').style.display = 'none'; document.getElementById('tabelaTextoRetorno').textContent = ''; }
     </script>
 
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            // O caminho '/Tecnico/service-worker.js' é importante para o GitHub Pages
-            navigator.serviceWorker.register('/Tecnico/service-worker.js')
-                .then(registration => {
-                    console.log('Service Worker registrado com sucesso:', registration);
-                })
-                .catch(error => {
-                    console.log('Falha ao registrar Service Worker:', error);
-                });
-        });
-    }
-</script>
-
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/Tecnico/service-worker.js')
+                    .then(registration => { console.log('Service Worker registrado com sucesso:', registration); })
+                    .catch(error => { console.log('Falha ao registrar Service Worker:', error); });
+            });
+        }
+    </script>
 </body>
 
 </html>
