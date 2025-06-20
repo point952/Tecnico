@@ -1,0 +1,16 @@
+{
+    "name": "Sistema de Produção",
+    "short_name": "Produção",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#1206ee",
+    "theme_color": "#1206ee",
+    "description": "Aplicativo para provisionamento e análise de CTOs.",
+    "icons": [
+        {
+            "src": "coloridapoint.png",
+            "sizes": "251x93",
+            "type": "image/png"
+        }
+    ]
+}
