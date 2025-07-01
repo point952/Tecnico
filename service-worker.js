@@ -1,11 +1,14 @@
-// Define um nome e uma versão para o nosso cache de arquivos
-const CACHE_NAME = 'producao-cache-v1';
-// Lista de todos os arquivos que o app precisa para funcionar offline
+// --- VERSÃO 2: ESTRATÉGIA STALE-WHILE-REVALIDATE ---
+
+// Mude a versão aqui para forçar a atualização para os usuários
+const CACHE_NAME = 'producao-cache-v2'; 
+
+// Lista de arquivos essenciais para o "esqueleto" do app
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/style.css',
-    '/coloridapoint.png',
+    '/Tecnico/index.html',
+    '/Tecnico/style.css',
+    '/Tecnico/coloridapoint.png',
+    '/Tecnico/manifest.json',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js',
     'https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js',
@@ -13,30 +16,50 @@ const urlsToCache = [
     'https://fonts.googleapis.com/icon?family=Material+Icons+Outlined'
 ];
 
-// Evento 'install': é disparado quando o service worker é instalado pela primeira vez.
+// Evento 'install': Guarda os arquivos essenciais no cache.
 self.addEventListener('install', event => {
-    // Espera até que o cache seja aberto e todos os nossos arquivos sejam adicionados a ele.
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
-                console.log('Cache aberto. Adicionando URLs ao cache.');
+                console.log('Service Worker: Cache aberto e pronto para salvar arquivos.');
                 return cache.addAll(urlsToCache);
             })
     );
 });
 
-// Evento 'fetch': é disparado toda vez que o app tenta buscar um arquivo (uma imagem, o css, etc.)
+// Evento 'activate': Limpa caches antigos para evitar conflitos e liberar espaço.
+self.addEventListener('activate', event => {
+    event.waitUntil(
+        caches.keys().then(cacheNames => {
+            return Promise.all(
+                cacheNames.map(cache => {
+                    if (cache !== CACHE_NAME) {
+                        console.log('Service Worker: Limpando cache antigo:', cache);
+                        return caches.delete(cache);
+                    }
+                })
+            );
+        })
+    );
+});
+
+// Evento 'fetch': Intercepta todos os pedidos de rede.
 self.addEventListener('fetch', event => {
     event.respondWith(
-        // Tenta encontrar o arquivo no cache primeiro.
-        caches.match(event.request)
-            .then(response => {
-                // Se encontrar no cache, retorna o arquivo do cache.
-                if (response) {
-                    return response;
-                }
-                // Se não encontrar no cache, busca na internet.
-                return fetch(event.request);
-            })
+        caches.open(CACHE_NAME).then(cache => {
+            // 1. Tenta pegar do cache primeiro
+            return cache.match(event.request).then(response => {
+                // Se estiver no cache, retorna a resposta do cache
+                // E, ao mesmo tempo, busca uma versão nova na rede
+                const fetchPromise = fetch(event.request).then(networkResponse => {
+                    // Se a busca na rede for bem-sucedida, atualiza o cache
+                    cache.put(event.request, networkResponse.clone());
+                    return networkResponse;
+                });
+
+                // Retorna a resposta do cache imediatamente (se houver), ou espera a resposta da rede
+                return response || fetchPromise;
+            });
+        })
     );
 });
