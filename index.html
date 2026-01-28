@@ -298,6 +298,54 @@
         </div>
     </div>
 
+    <!-- Modal Aviso de Migração -->
+    <div class="modal fade" id="modalMigracao" tabindex="-1" aria-labelledby="modalMigracaoLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title" id="modalMigracaoLabel">
+                        <span class="material-icons-outlined">warning</span>
+                        Atenção – Migração de Sistema
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Este sistema está em processo de <strong>migração para uma nova plataforma</strong>.
+                    </p>
+    
+                    <p>
+                        👉 <strong>O endereço oficial atualizado é:</strong><br>
+                        <a href="https://sistemacontrole.dynv6.net:59987" target="_blank">
+                            https://sistemacontrole.dynv6.net:59987
+                        </a>
+                    </p>
+    
+                    <p>
+                        Todos os técnicos <strong>já devem estar utilizando o novo sistema</strong>.
+                    </p>
+    
+                    <p>
+                        Em caso de dúvidas ou dificuldades, entre em contato com
+                        <strong>Carlito</strong> ou <strong>Luiz Paulo</strong> na <strong>Central</strong>.
+                    </p>
+    
+                    <p class="text-muted mb-0">
+                        Este aviso continuará sendo exibido para garantir a correta migração.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <a href="https://sistemacontrole.dynv6.net:59987" target="_blank" class="btn btn-primary">
+                        Ir para o novo sistema
+                    </a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Entendi, continuar aqui
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
     <script>
@@ -311,7 +359,17 @@
             initAnimations();
             initEventListeners();
             createDynamicFields();
+        
+            // Abre o aviso de migração sempre que acessar
+            const modalMigracao = new bootstrap.Modal(document.getElementById('modalMigracao'));
+            modalMigracao.show();
+    
+            // OPÇÃO 2 — Redirecionamento direto (DESATIVADO POR ENQUANTO)
+            // 🚨 ATIVAR REDIRECIONAMENTO DEFINITIVO
+            // window.location.href = 'https://sistemacontrole.dynv6.net:59987';
+    
         });
+
 
         function initModals() {
             confirmModal = new bootstrap.Modal(document.getElementById('modalConfirmWifiChange'));
